@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>vue.js</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,7 +25,14 @@
 
     <input v-model="message" type="text">
 
-    <p v-if="show">hello!!! vue.js</p>
+
+
+    <br>
+    <br>
+    <button v-on:click="show!=show">切り替え</button>
+    <transition>
+        <p v-if="show">transitionタグを使用した要素</p>
+    </transition>
 
 </div>
 
