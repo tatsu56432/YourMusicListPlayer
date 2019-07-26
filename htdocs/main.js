@@ -4,6 +4,11 @@ var app = new Vue({
        message :'Hello vue.js!!',
        list : ["list1","list2","list555"]
     },
+    methods :{
+        handleClick:function (event) {
+           alert(event.target);
+       }
+    }
 });
 
 
