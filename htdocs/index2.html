@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+
+<div id="app-104">
+    <input type="checkbox" @click="change" checked>
+    <span v-if="seen">Hello!</span>
+</div>
+<script>
+    var app104 = new Vue({
+        el: '#app-104',
+        data: { seen: true },
+        methods: {
+            change: function(e) {
+                this.seen = e.target.checked
+            }
+        }
+    })
+</script>
+
+
+<div id="app-108">
+<button @click="hello">
+    Hello
+</button>
+</div>
+
+<script>
+    var app108 = new Vue({
+        el:'#app-108',
+        methods:{
+            hello:function () {
+                alert("hello!!!");
+            }
+        }
+    })
+</script>
+
+
+
+</body>
+</html>
