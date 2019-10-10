@@ -36,14 +36,16 @@
         //     );
         // }
 
-        render:(element)=>{
-            var p = element("p",
-                {style:'font-size:20px'},
-                data.message);
-            var li = data.items.map(item => element('li',item));
-            var ol = element('ol',li);
-            var div = element('div',[p,ol]);
-            return div;
+        render:(h)=>{
+            return h('div',[
+                h('p',{style:'font-size:20pt;'},
+                    data.message
+                ),
+                h('ol',
+                    data.items.map(i=> h('li',i))
+                )
+                ]
+            )
         }
     });
 
