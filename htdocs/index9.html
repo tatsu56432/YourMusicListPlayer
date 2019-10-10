@@ -34,11 +34,17 @@ table tr td {
                 <th>mail</th>
                 <th>tel</th>
             </tr>
-            <tr v-for="(item,id) in items">
-                <td>{{id}}</td>
+            <tr v-for="(item,index) in items" v-if="index % 2 == 0">
+                <td>{{index}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.mail}}</td>
                 <td>{{item.tel}}</td>
+            </tr>
+            <tr v-else>
+                <td>非公開</td>
+                <td>非公開</td>
+                <td>非公開</td>
+                <td>非公開</td>
             </tr>
         </table>
     </template>
