@@ -11,6 +11,7 @@
 
 <h1>vue.js</h1>
 <div id="app">
+    <!--style属性にstyle変数をセット-->
     <p v-bind:style="style">{{message}}</p>
     <hr>
     <input type="number" onchange="doChange(event) ;" value="20">
@@ -18,6 +19,7 @@
 <script>
     var data = {
         message:"Hello World",
+        //これがstyle変数やろ多分
         style:"font-size:20pt;color:red;"
     }
     var app = new Vue({
