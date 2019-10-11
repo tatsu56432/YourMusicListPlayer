@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<style>
+    .hello{
+        font-size: 20pt;
+        font-weight: bold;
+        border: 1px solid magenta;
+        padding: 5px 10px 0 10px;
+    }
+
+    .red {
+        color: white;
+        background-color: red;
+    }
+</style>
+
+<h1>Vue.js</h1>
+
+<div id="app">
+    <hello></hello>
+</div>
+
+<script>
+
+    var hello = Vue.component('hello', {
+        data:function(){
+            return {
+                counter:0,
+                isRed:false
+            };
+        },
+        methods:{
+            doAction:function (event) {
+                this.counter++;
+                if(this.counter > 10){
+                    this.counter = 0;
+                }
+
+                if(this.counter % 2 === 0){
+                    this.isRed = false;
+                }else{
+                    this.isRed = true;
+                }
+            }
+        },
+        template: '<p v-bind:class="{red:isRed}" v-on:click="doAction" class="hello">clicked:{{counter}}</p>'
+    });
+
+    var app = new Vue({
+        el: '#app',
+    });
+</script>
+</body>
+</html>
