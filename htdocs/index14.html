@@ -31,7 +31,7 @@
                 counter:0
             }
         },
-       template:'<p onclick="counter++" class="hello">clicked:{{counter}}</p>'
+       template:'<p v-on:click="counter++" class="hello">clicked:{{counter}}</p>'
     });
 
     var app = new Vue({
