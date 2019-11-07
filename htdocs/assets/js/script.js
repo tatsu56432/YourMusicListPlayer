@@ -1,20 +1,19 @@
-!function () {
-
+!function ($) {
 
     var app = {
         Vue: {},
         Music: {}
     }
 
-
     app.Vue.el = "#js-vue";
     app.Vue.methods = {},
-    app.Vue.watch = {},
-    app.Vue.computed,
-    app.Vue.mounted,
+        app.Vue.watch = {},
+        app.Vue.computed,
+        app.Vue.created,
+        app.Vue.mounted,
 
-    app.Vue.data = {},
-    app.Vue.data.items = [];
+        app.Vue.data = {},
+        app.Vue.data.items = [];
     app.Vue.data.youtubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
@@ -28,27 +27,27 @@
     // app.music.player = {};
 
     app.Vue.methods.getYoutubeData = function () {
-        axios.get('https://www.googleapis.com/youtube/v3/playlistItems',{params: this.youtubeDataApiParam})
-            .then(function (response) {
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+        return axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {params: this.youtubeDataApiParam})
     }
 
-
-    app.Vue.mounted = function () {
-        this.getYoutubeData();
+    app.Vue.methods.getYoutubeData_snippets = function (response) {
+        for (var i = 0; i < response.data.items.length; i++) {
+            this.youtubeData.push(response.data.items[i].snippet);
+        }
     }
 
+    app.Vue.created = async function () {
+
+    }
+
+    app.Vue.mounted = async function () {
+        var response = await this.getYoutubeData();
+        this.getYoutubeData_snippets(response)
 
 
-
+    }
 
     new Vue(app.Vue)
 
 
-
-
-}();
+}(jQuery);
