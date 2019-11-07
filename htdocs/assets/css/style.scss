@@ -71,9 +71,10 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  &__inner{
+    height: 100%;
+  }
 }
-
-
 
 
 .m-player__frame[state="play"] {
@@ -103,8 +104,6 @@ body {
 }
 
 .songs__item{
-
-
   position: relative;
   display: flex;
   -webkit-box-orient: horizontal;
