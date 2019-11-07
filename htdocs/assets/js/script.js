@@ -35,7 +35,7 @@
     app.Music.methods = {},
     app.Music._songs = [],
     app.Music.player = {},
-    app.Music.autoplay = !0,
+    app.Music.autoplay = true,
     app.Music.sortby = "videoId",
     app.Music.filterby = "all",
     app.Music.nowplaying = {
@@ -55,6 +55,11 @@
 
     app.Vue.created = async function () {
 
+        console.log(this.playerState)
+        console.log(app.Music.nowplaying.state)
+
+
+
     }
 
     app.Vue.mounted = async function () {
@@ -68,7 +73,8 @@
 
         // console.log(e.currentTarget.getAttribute("videoId"))
 
-        console.log(app.Music.nowplaying)
+
+
 
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
@@ -138,16 +144,25 @@
     }
 
     app.Music.methods.onYoutubeStateChange = function(t) {
-        //alert("ok!")
 
-        if (0 === t.data) {
+        //youtubeが状態変化した時にVueのインスタンスにもplayerの状態を持たす
+        var is_playing = app.Music.nowplaying.state==="play" ? true: false;
+        if(is_playing){
+            app.Vue.data.playerState = true
+        }else{
+            app.Vue.data.playerState = false
+        }
+
+
+        if (0 == t.data) {
             var s, o = app.Vue.data.youtubeData.map(function(t) {
-                return t.videoId == app.Music.nowplaying.videoId
+                return t.resourceId.videoId === app.Music.nowplaying.videoId;
             });
 
-            -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]),
-                app.Music.autoplay && void 0 != s && "" != s.youtubeID ? (app.Music.methods.createYoutube(s.youtubeID),
-                app.Music.methods.setNowplaying(s.youtubeID, "play")) : app.Music.methods.stop()
+            //動画終了した時次の動画
+
+            -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]), app.Music.autoplay && void 0 != s && "" != s.videoId ? (app.Music.methods.createYoutube(s.videoId),
+            app.Music.methods.setNowplaying(s.videoId, "play")) : app.Music.methods.stop()
         }
 
     }

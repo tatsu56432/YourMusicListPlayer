@@ -65,7 +65,7 @@ body {
       width: 25%; }
 
 .l-songs {
-  transition: width .5s;
+  transition: all .5s;
   width: 80%; }
 
 .l-sidebar {

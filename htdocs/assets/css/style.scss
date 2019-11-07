@@ -79,7 +79,7 @@ body {
 }
 
 .l-songs {
-  transition: width .5s;
+  transition: all .5s;
   width: 80%;
 }
 
@@ -128,7 +128,6 @@ body {
 }
 
 .songs__list {
-
   width: 100%;
   max-width: calc(1000px + 30px);
   margin-left: auto;
