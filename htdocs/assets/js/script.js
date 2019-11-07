@@ -25,6 +25,7 @@
     };
 
     app.Vue.data.playerState = false;
+    app.Vue.data.perPlayerState = false;
 
     // var classObj = {
     //     is_playing:false,
@@ -54,6 +55,12 @@
         for (var i = 0; i < response.data.items.length; i++) {
             this.youtubeData.push(response.data.items[i].snippet);
         }
+
+        // for (var i = 0; i < response.data.items.length; i++) {
+        //     this.youtubeData.push(response.data.items[i].snippet.playingState);
+        // }
+
+
     }
 
     app.Vue.created = async function () {
@@ -69,6 +76,8 @@
 
     app.Vue.methods.onClickPlay = function (e) {
         // console.log(e.currentTarget.getAttribute("videoId"))
+
+
 
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
@@ -151,19 +160,16 @@
 
         app.Vue.data.youtubeData.forEach(function (obj,index) {
 
-
-
             if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
-                console.log(obj);
+                // console.log(obj);
                 // obj.playingState = true;
-                Vue.set(app.Vue.data.youtubeData,'playingState',true)
+                Vue.set(obj,'playingState',true);
+                // Vue.set(app.Vue.data[index].resourceId,'playingState',true)
                 // this.$set(this.youtubeData[index], 'playingState', true)
-
             }else{
-
-                Vue.set(app.Vue.data.youtubeData,'playingState',false)
+                Vue.set(obj,'playingState',false);
+                // Vue.set(app.Vue.data.youtubeData[index].resourceId,'playingState',false)
                 // obj.playingState = false;
-
                 // this.$set(this.youtubeData[index], 'playingState', false)
             }
 
@@ -171,10 +177,10 @@
 
         // app.Vue.data.youtubeData.map(function (data) {
         //     if(data.resourceId.videoId === app.Music.nowplaying.videoId){
-        //         this.$set(this.youtubeData, 'playingState', true)
+        //         Vue.set(app.Vue.data.youtubeData.resourceId, 'playingState', true)
         //         // data.playingState = true;
         //     }else{
-        //         this.$set(this.youtubeData, 'playingState', false)
+        //         Vue.set(app.Vue.data.youtubeData.resourceId, 'playingState', false)
         //         // data.playingState = false;
         //     }
         // })
