@@ -7,35 +7,81 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>vue.js</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
-<div id="app">
 
-    <p>{{message}}</p>
-
-    <ul>
-        <li v-for="item in list">{{item}}</li>
-    </ul>
+<div id="js-vue" class="l-contents" >
 
 
-    <button v-on:click= "handleClick">button</button>
+    <div  class="l-contents__inner" :class="{'is-playing': playerState}">
+
+        <div class="l-sidebar sidebar">
+            <div class="sidebar__inner">
+
+            </div>
+        </div>
+
+        <div class="l-songs songs">
+            <div class="songs__inner">
+
+                <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
+                <div class="songs__item" v-for="item in youtubeData" v-bind:state="item.playingState" v-bind:key="item.resourceId.videoId" :class="{'is-playing': item.playingState}">
+
+                    <figure class="songs__cover">
+                        <img v-bind:src="item.thumbnails.high.url">
+                    </figure>
+
+                    <div class="songs__meta">
+                        <span class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">play</span>
+
+                        <h3 class="title">
+                            <!--<span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>-->
 
 
-    <input v-model="message" type="text">
+
+                            <!--<span class="song">{{item.resourceId.videoId}}</span>-->
+                            <span class="song">{{item.title}}</span>
+                        </h3>
+
+                        <!--<p class="album">{{item.album}}, {{item.year}}</p>-->
+
+                        <ul class="songs__links">
+                            <li>Link:</li>
+                            <li><a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.resourceId.videoId">YouTube</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!--</transition-group>-->
+
+            </div>
+        </div><!-- songs -->
+
+        <div class="l-player">
+            <div id="js-youtubePlayer" class="l-player__inner">
+                <div id="js-frame"></div>
+
+                <!--<iframe id="js-frame" class="m-player__frame" state="play" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/xd3jcVi5zZ4?autoplay=0&amp;playsinline=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fnujawak.online&amp;widgetid=1"></iframe>-->
+            </div>
+        </div>
+
+    </div>
 
 
 
-    <br>
-    <br>
-    <button v-on:click="show!=show">切り替え</button>
-    <transition>
-        <p v-if="show">transitionタグを使用した要素</p>
-    </transition>
 
 </div>
 
+
+
+
 </body>
-<script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="./assets/js/script.js"></script>
 </html>
