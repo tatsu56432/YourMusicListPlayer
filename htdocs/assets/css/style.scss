@@ -78,7 +78,7 @@ body {
   width: 20%;
 }
 .sidebar{
-  background-color: #319fca;
+  //background-color: #319fca;
   //height: 100%;
   &__inner{
 
@@ -163,6 +163,19 @@ body {
 
 .songs__meta{
   width: calc(100% - 160px - 1em);
+
+  .playBtn{
+    cursor: pointer;
+    display: block;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #319fca;
+    text-align: center;
+    padding: 3px 0 6px;
+    vertical-align: middle;
+    max-width: 50px;
+  }
+
   &__links{
     list-style: none;
     color: #777;

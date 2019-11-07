@@ -43,10 +43,7 @@
     app.Vue.mounted = async function () {
         var response = await this.getYoutubeData();
         this.getYoutubeData_snippets(response)
-
         console.log(this.youtubeData)
-
-
     }
 
     new Vue(app.Vue)
