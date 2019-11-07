@@ -28,15 +28,14 @@
             <div class="songs__inner">
 
                 <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
-                <div class="songs__item" v-for="item in youtubeData" v-bind:songID="item.songID" v-bind:state="item.state" v-bind:key="item.songID">
-
+                <div class="songs__item" v-for="item in youtubeData" v-bind:state="item.state" v-bind:key="item.resourceId.videoId">
 
                     <figure class="songs__cover">
                         <img v-bind:src="item.thumbnails.high.url">
                     </figure>
 
                     <div class="songs__meta">
-                        <h3 class="title u-mb-0">
+                        <h3 class="title">
                             <!--<span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>-->
 
                             <span class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">play</span>

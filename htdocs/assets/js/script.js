@@ -76,7 +76,7 @@
                     app.Music.methods.pause();
                     break;
                 case "pause":
-                    // app.Music.methods.reStart()
+                    app.Music.methods.reStart()
             }
         }else{
             app.Music.methods.start(e)
@@ -89,6 +89,17 @@
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
         app.Music.methods.createYoutube(e.currentTarget.getAttribute("videoId"))
     }
+
+    app.Music.methods.pause = function() {
+        app.Music.player.pauseVideo()
+        app.Music.methods.setNowplaying(app.Music.nowplaying.videoId, "pause")
+    }
+
+    app.Music.methods.reStart = function() {
+        app.Music.player.playVideo()
+        app.Music.methods.setNowplaying(app.Music.nowplaying.videoId, "play")
+    }
+
 
     app.Music.methods.setNowplaying = function(videoID, state) {
         app.Music.nowplaying.videoId = videoID,
@@ -111,7 +122,7 @@
                 },
                 events: {
                     onReady: app.Music.methods.onYoutubeReady,
-                    // onStateChange: e.Music.methods.onYoutubeStateChange,
+                    onStateChange: app.Music.methods.onYoutubeStateChange,
                     // onError: e.Music.methods.onYoutubeError
                 }
             };
@@ -126,11 +137,23 @@
         e.target.playVideo()
     }
 
+    app.Music.methods.onYoutubeStateChange = function(t) {
+        //alert("ok!")
 
+        if (0 === t.data) {
+            var s, o = app.Vue.data.youtubeData.map(function(t) {
+                return t.videoId == app.Music.nowplaying.videoId
+            });
+
+            -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]),
+                app.Music.autoplay && void 0 != s && "" != s.youtubeID ? (app.Music.methods.createYoutube(s.youtubeID),
+                app.Music.methods.setNowplaying(s.youtubeID, "play")) : app.Music.methods.stop()
+        }
+
+    }
 
 
     new Vue(app.Vue)
-    new Vue(app.Music)
 
 
 }(jQuery);
