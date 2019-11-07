@@ -13,37 +13,46 @@
 <body>
 
 
-<div id="js-vue">
+<div id="js-vue" class="l-contents">
 
-    <div class="songs l-songs">
+
+    <div class="l-sidebar sidebar">
+        <div class="sidebar__inner">
+
+        </div>
+    </div>
+
+    <div class="l-songs songs">
         <div class="songs__inner">
 
 
-            <transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear"class="songs__list m-content">
-                <div class="songs__item" v-for="item in items" v-bind:songID="item.songID" v-bind:state="item.state" v-bind:key="item.songID">
+            <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
+                <div class="songs__item" v-for="item in youtubeData" v-bind:songID="item.songID" v-bind:state="item.state" v-bind:key="item.songID">
 
                     <figure class="songs__cover">
-                        <img src="https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg" alt="">
-                        <!--<img v-bind:src="'./resources/img/' + item.discogsID + '.jpg'" v-bind:alt="item.title">-->
+                        <img v-bind:src="item.thumbnails.high.url" v-bind:alt="item.title">
                     </figure>
+
+
 
                     <div class="songs__meta">
                         <h3 class="title u-mb-0">
-                            <span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>
+                            <!--<span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>-->
                             <span class="song">{{item.title}}</span>
-                            <!--<span class="leader">{{item.leader}}</span>-->
                         </h3>
 
-                        <p class="album">{{item.album}}, {{item.year}}</p>
-                        <p class="u-text-italic"><small>第{{item.chapter}}章 {{item.chapterTitle}}</small></p>
-                        <ul class="songs__links m-grid">
-                            <li>Links:</li>
-                            <li><a target="_blank" v-bind:href="item.discogsURL">Discogs</a></li>
-                            <li><a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.youtubeID">YouTube</a></li>
-                        </ul>
+                        <!--<p class="album">{{item.album}}, {{item.year}}</p>-->
+
+                        <!--<ul class="songs__links m-grid">-->
+                            <!--<li>Links:</li>-->
+                            <!--<li><a target="_blank" v-bind:href="item.discogsURL">Discogs</a></li>-->
+                            <!--<li><a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.youtubeID">YouTube</a></li>-->
+                        <!--</ul>-->
                     </div>
+
                 </div>
-            </transition-group>
+
+            <!--</transition-group>-->
 
         </div>
     </div><!-- songs -->

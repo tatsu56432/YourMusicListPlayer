@@ -17,7 +17,7 @@
     app.Vue.data.youtubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
-        playlistId: 'PLlVlyGVtvuVnJ_wdbrb_PUKtndQqzU4me', // 再生リストID
+        playlistId: 'PL5V6jEpgjar87uPuGiz18LGmWAHs6RMJH', // 再生リストID
         maxResults: 30, // デフォルトは5件
         key: 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
     }
@@ -43,6 +43,8 @@
     app.Vue.mounted = async function () {
         var response = await this.getYoutubeData();
         this.getYoutubeData_snippets(response)
+
+        console.log(this.youtubeData)
 
 
     }
