@@ -11,9 +11,12 @@
     app.Vue.computed,
     app.Vue.created,
     app.Vue.mounted,
+    app.Vue.computed,
+    app.Vue.watch ={},
     app.Vue.data = {},
     app.Vue.data.items = [];
     app.Vue.data.youtubeData = [];
+
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: 'PL5V6jEpgjar87uPuGiz18LGmWAHs6RMJH', // 再生リストID
@@ -58,23 +61,14 @@
         console.log(this.playerState)
         console.log(app.Music.nowplaying.state)
 
-
-
-    }
-
-    app.Vue.mounted = async function () {
         var response = await this.getYoutubeData();
         this.getYoutubeData_snippets(response)
-        //console.log(this.youtubeData)
     }
+
 
 
     app.Vue.methods.onClickPlay = function (e) {
-
         // console.log(e.currentTarget.getAttribute("videoId"))
-
-
-
 
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
@@ -154,16 +148,48 @@
         }
 
 
-        if (0 == t.data) {
-            var s, o = app.Vue.data.youtubeData.map(function(t) {
-                return t.resourceId.videoId === app.Music.nowplaying.videoId;
-            });
 
-            //動画終了した時次の動画
+        app.Vue.data.youtubeData.forEach(function (obj,index) {
 
-            -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]), app.Music.autoplay && void 0 != s && "" != s.videoId ? (app.Music.methods.createYoutube(s.videoId),
-            app.Music.methods.setNowplaying(s.videoId, "play")) : app.Music.methods.stop()
-        }
+
+
+            if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
+                console.log(obj);
+                // obj.playingState = true;
+                Vue.set(app.Vue.data.youtubeData,'playingState',true)
+                // this.$set(this.youtubeData[index], 'playingState', true)
+
+            }else{
+
+                Vue.set(app.Vue.data.youtubeData,'playingState',false)
+                // obj.playingState = false;
+
+                // this.$set(this.youtubeData[index], 'playingState', false)
+            }
+
+        })
+
+        // app.Vue.data.youtubeData.map(function (data) {
+        //     if(data.resourceId.videoId === app.Music.nowplaying.videoId){
+        //         this.$set(this.youtubeData, 'playingState', true)
+        //         // data.playingState = true;
+        //     }else{
+        //         this.$set(this.youtubeData, 'playingState', false)
+        //         // data.playingState = false;
+        //     }
+        // })
+
+        console.log(app.Vue.data.youtubeData)
+
+
+        // if (0 == t.data) {
+        //     var s, o = app.Vue.data.youtubeData.map(function(t) {
+        //         return t.resourceId.videoId === app.Music.nowplaying.videoId;
+        //     });
+        //     //動画終了した時次の動画
+        //     -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]), app.Music.autoplay && void 0 != s && "" != s.videoId ? (app.Music.methods.createYoutube(s.videoId),
+        //     app.Music.methods.setNowplaying(s.videoId, "play")) : app.Music.methods.stop()
+        // }
 
     }
 

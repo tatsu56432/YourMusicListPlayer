@@ -158,6 +158,9 @@ body {
   border: 5px solid #cccccc;
   -webkit-transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  &.is-playing{
+    border: 5px solid palevioletred;
+  }
   &:not(:first-child) {
     margin-top: 50px;
   }
