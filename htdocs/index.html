@@ -7,35 +7,62 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>vue.js</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<div id="app">
-
-    <p>{{message}}</p>
-
-    <ul>
-        <li v-for="item in list">{{item}}</li>
-    </ul>
 
 
-    <button v-on:click= "handleClick">button</button>
+<div id="js-vue">
+
+    <div class="songs l-songs">
+        <div class="songs__inner">
 
 
-    <input v-model="message" type="text">
+            <transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear"class="songs__list m-content">
+                <div class="songs__item" v-for="item in items" v-bind:songID="item.songID" v-bind:state="item.state" v-bind:key="item.songID">
+                    <figure class="songs__cover">
+
+
+                        <img src="https://i.ytimg.com/vi/7lCDEYXw3mM/hqdefault.jpg" alt="">
+                        
+
+                        <!--<img v-bind:src="'./resources/img/' + item.discogsID + '.jpg'" v-bind:alt="item.title">-->
+                    </figure>
+                    <div class="songs__meta">
+                        <h3 class="title u-mb-0">
+                            <span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>
+                            <span class="song">{{item.title}}</span>
+                            <span class="leader">{{item.leader}}</span>
+                        </h3>
+                        <p class="album">{{item.album}}, {{item.year}}</p>
+                        <p class="u-text-italic"><small>第{{item.chapter}}章 {{item.chapterTitle}}</small></p>
+                        <ul class="songs__links m-grid">
+                            <li>Links:</li>
+                            <li><a target="_blank" v-bind:href="item.discogsURL">Discogs</a></li>
+                            <li><a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.youtubeID">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </transition-group>
+        </div>
+    </div><!-- songs -->
 
 
 
-    <br>
-    <br>
-    <button v-on:click="show!=show">切り替え</button>
-    <transition>
-        <p v-if="show">transitionタグを使用した要素</p>
-    </transition>
+    <div class="l-player">
+        <div id="js-youtubePlayer">
+            <iframe id="js-frame" class="m-player__frame" state="play" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/xd3jcVi5zZ4?autoplay=0&amp;playsinline=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fnujawak.online&amp;widgetid=1"></iframe>
+        </div>
+    </div>
 
 </div>
 
+
+
+
 </body>
-<script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="./assets/js/script.js"></script>
 </html>
