@@ -121,8 +121,14 @@ body {
   border: 5px solid #cccccc;
   -webkit-transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
-  .songs__item.is-playing {
+  .songs__item[state="play"] {
     border: 5px solid palevioletred; }
+    .songs__item[state="play"] .playBtn {
+      background-color: palevioletred; }
+  .songs__item[state="pause"] {
+    border: 5px solid #d4d31b; }
+    .songs__item[state="pause"] .playBtn {
+      background-color: #d4d31b; }
   .songs__item:not(:first-child) {
     margin-top: 50px; }
 
@@ -145,7 +151,7 @@ body {
     text-align: center;
     padding: 3px 0 6px;
     vertical-align: middle;
-    max-width: 50px; }
+    max-width: 70px; }
   .songs__meta__links {
     list-style: none;
     color: #777; }

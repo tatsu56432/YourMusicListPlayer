@@ -35,13 +35,13 @@
                     </figure>
 
                     <div class="songs__meta">
-                        <span class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">play</span>
+                        <span v-if="item.playingState === 'play'" class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">playing</span>
+                        <span v-else-if="item.playingState === 'pause'" class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">pause</span>
+                        <span v-else class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">play</span>
+
+                        <!--<span class="playBtn" v-on:click="onClickPlay" v-bind:videoId="item.resourceId.videoId">play</span>-->
 
                         <h3 class="title">
-                            <!--<span class="button" v-on:click="onClickPlay" v-bind:songID="item.songID" v-bind:youtubeID="item.youtubeID">再生</span>-->
-
-
-
                             <!--<span class="song">{{item.resourceId.videoId}}</span>-->
                             <span class="song">{{item.title}}</span>
                         </h3>

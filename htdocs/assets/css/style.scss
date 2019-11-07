@@ -158,9 +158,19 @@ body {
   border: 5px solid #cccccc;
   -webkit-transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  &.is-playing{
+  &[state="play"]{
     border: 5px solid palevioletred;
+    .playBtn{
+      background-color: palevioletred;
+    }
   }
+  &[state="pause"]{
+    border: 5px solid #d4d31b;
+    .playBtn{
+      background-color: #d4d31b;
+    }
+  }
+
   &:not(:first-child) {
     margin-top: 50px;
   }
@@ -188,7 +198,7 @@ body {
     text-align: center;
     padding: 3px 0 6px;
     vertical-align: middle;
-    max-width: 50px;
+    max-width: 70px;
   }
 
   &__links {

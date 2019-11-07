@@ -55,12 +55,6 @@
         for (var i = 0; i < response.data.items.length; i++) {
             this.youtubeData.push(response.data.items[i].snippet);
         }
-
-        // for (var i = 0; i < response.data.items.length; i++) {
-        //     this.youtubeData.push(response.data.items[i].snippet.playingState);
-        // }
-
-
     }
 
     app.Vue.created = async function () {
@@ -72,12 +66,12 @@
         this.getYoutubeData_snippets(response)
     }
 
+    app.Vue.mounted= function(){
 
+    }
 
     app.Vue.methods.onClickPlay = function (e) {
         // console.log(e.currentTarget.getAttribute("videoId"))
-
-
 
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
@@ -163,27 +157,18 @@
             if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
                 // console.log(obj);
                 // obj.playingState = true;
-                Vue.set(obj,'playingState',true);
+                Vue.set(obj,'playingState',app.Music.nowplaying.state);
                 // Vue.set(app.Vue.data[index].resourceId,'playingState',true)
                 // this.$set(this.youtubeData[index], 'playingState', true)
             }else{
-                Vue.set(obj,'playingState',false);
+                Vue.set(obj,'playingState',"stop");
+                // Vue.set(obj,'playingState',app.Music.nowplaying.state);
                 // Vue.set(app.Vue.data.youtubeData[index].resourceId,'playingState',false)
                 // obj.playingState = false;
                 // this.$set(this.youtubeData[index], 'playingState', false)
             }
 
         })
-
-        // app.Vue.data.youtubeData.map(function (data) {
-        //     if(data.resourceId.videoId === app.Music.nowplaying.videoId){
-        //         Vue.set(app.Vue.data.youtubeData.resourceId, 'playingState', true)
-        //         // data.playingState = true;
-        //     }else{
-        //         Vue.set(app.Vue.data.youtubeData.resourceId, 'playingState', false)
-        //         // data.playingState = false;
-        //     }
-        // })
 
         console.log(app.Vue.data.youtubeData)
 
