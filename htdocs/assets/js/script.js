@@ -19,17 +19,27 @@
         playlistId: 'PL5V6jEpgjar87uPuGiz18LGmWAHs6RMJH', // 再生リストID
         maxResults: 30, // デフォルトは5件
         key: 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
-    }
+    };
+
+    app.Vue.data.playerState = false;
+
+    // var classObj = {
+    //     is_playing:false,
+    // }
+    //
+    // app.Vue.data.class = classObj;
+
+
 
 
     app.Music.methods = {},
     app.Music._songs = [],
     app.Music.player = {},
     app.Music.autoplay = !0,
-    app.Music.sortby = "songID",
+    app.Music.sortby = "videoId",
     app.Music.filterby = "all",
     app.Music.nowplaying = {
-            songID: null,
+            videoId: null,
             state: "stop"
         },
 
@@ -43,8 +53,6 @@
         }
     }
 
-
-
     app.Vue.created = async function () {
 
     }
@@ -52,16 +60,17 @@
     app.Vue.mounted = async function () {
         var response = await this.getYoutubeData();
         this.getYoutubeData_snippets(response)
-        console.log(this.youtubeData)
+        //console.log(this.youtubeData)
     }
 
 
     app.Vue.methods.onClickPlay = function (e) {
 
-        console.log(e.currentTarget.getAttribute("videoId"))
+        // console.log(e.currentTarget.getAttribute("videoId"))
 
-        if (e.currentTarget.getAttribute("videoId") == app.Music.nowplaying.songID){
+        console.log(app.Music.nowplaying)
 
+        if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
                 case "play":
                     app.Music.methods.pause();
@@ -69,23 +78,30 @@
                 case "pause":
                     // app.Music.methods.reStart()
             }
-
         }else{
-
             app.Music.methods.start(e)
         }
 
+    }
 
 
+    app.Music.methods.start = function (e) {
+        app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
+        app.Music.methods.createYoutube(e.currentTarget.getAttribute("videoId"))
+    }
 
+    app.Music.methods.setNowplaying = function(videoID, state) {
+        app.Music.nowplaying.videoId = videoID,
+        app.Music.nowplaying.state = state;
+        document.getElementById("js-frame").setAttribute("state", state)
     }
 
 
     app.Music.methods.createYoutube = function (videoId) {
 
-        if ("" != videoId) {
+        if ("" !== videoId) {
             document.getElementById("js-frame").innerHTML = "",
-            "object" == typeof app.Music.player && "destroy" in app.Music.player && app.Music.player.destroy(), app.Music.player = {};
+            "object" === typeof app.Music.player && "destroy" in app.Music.player && app.Music.player.destroy(), app.Music.player = {};
 
             var playerParams = {
                 videoId: videoId,
@@ -105,32 +121,16 @@
         }
     }
 
-    app.Music.methods.start = function (e) {
-        app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play"),
-        app.Music.methods.createYoutube(e.currentTarget.getAttribute("videoId"))
-
-    }
-
     app.Music.methods.onYoutubeReady = function(e) {
         console.log("onYoutubeReady(): " + e.target.getVideoData().video_id),
         e.target.playVideo()
     }
 
-    app.Music.methods.setNowplaying = function(videoID, state) {
 
-        app.Music.nowplaying.songID = videoID,
-            app.Music.nowplaying.state = state,
-
-            // app.Vue.data.items.map(function(t) {
-            //     return t.songID == e.music.nowplaying.songID ? t.state = s : t.state = "stop",
-            //         t
-            // }),
-
-            document.getElementById("js-frame").setAttribute("state", state)
-    }
 
 
     new Vue(app.Vue)
+    new Vue(app.Music)
 
 
 }(jQuery);

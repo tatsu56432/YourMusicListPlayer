@@ -13,20 +13,21 @@
 <body>
 
 
-<div id="js-vue" class="l-contents">
+<div id="js-vue" class="l-contents" >
 
 
-    <div class="l-sidebar sidebar">
-        <div class="sidebar__inner">
+    <div  class="l-contents__inner" >
 
+        <div class="l-sidebar sidebar">
+            <div class="sidebar__inner">
+
+            </div>
         </div>
-    </div>
 
-    <div class="l-songs songs">
-        <div class="songs__inner">
+        <div class="l-songs songs">
+            <div class="songs__inner">
 
-
-            <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
+                <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
                 <div class="songs__item" v-for="item in youtubeData" v-bind:songID="item.songID" v-bind:state="item.state" v-bind:key="item.songID">
 
 
@@ -54,20 +55,23 @@
 
                 </div>
 
-            <!--</transition-group>-->
+                <!--</transition-group>-->
 
+            </div>
+        </div><!-- songs -->
+
+        <div class="l-player">
+            <div id="js-youtubePlayer" class="l-player__inner">
+                <div id="js-frame"></div>
+
+                <!--<iframe id="js-frame" class="m-player__frame" state="play" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/xd3jcVi5zZ4?autoplay=0&amp;playsinline=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fnujawak.online&amp;widgetid=1"></iframe>-->
+            </div>
         </div>
-    </div><!-- songs -->
 
-
-
-    <div class="l-player">
-        <div id="js-youtubePlayer" class="l-player__inner">
-            <div id="js-frame"></div>
-
-            <!--<iframe id="js-frame" class="m-player__frame" state="play" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/xd3jcVi5zZ4?autoplay=0&amp;playsinline=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fnujawak.online&amp;widgetid=1"></iframe>-->
-        </div>
     </div>
+
+
+
 
 </div>
 

@@ -56,11 +56,16 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-.l-contents {
+.l-contents .l-contents__inner {
   display: flex;
   height: 100%; }
+  .l-contents .l-contents__inner.is-playing {
+    justify-content: flex-end; }
+    .l-contents .l-contents__inner.is-playing .l-songs {
+      width: 25%; }
 
 .l-songs {
+  transition: width .5s;
   width: 80%; }
 
 .l-sidebar {
@@ -81,14 +86,14 @@ body {
       opacity: 0;
       transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
     .l-player__inner iframe[state="play"] {
-      opacity: 0.1; }
+      opacity: 0.7; }
 
 .songs {
   width: 100%; }
 
 .songs__list {
   width: 100%;
-  max-width: calc( 1000px + 30px);
+  max-width: calc(1000px + 30px);
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
