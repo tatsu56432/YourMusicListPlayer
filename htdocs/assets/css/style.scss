@@ -65,6 +65,7 @@ body {
 }
 
 .l-contents {
+  padding: 10px 0;
   .l-contents__inner {
     display: flex;
     height: 100%;
@@ -162,6 +163,10 @@ body {
     border: 5px solid palevioletred;
     .playBtn{
       background-color: palevioletred;
+    }
+    color: palevioletred;
+    a{
+      color: palevioletred;
     }
   }
   &[state="pause"]{
