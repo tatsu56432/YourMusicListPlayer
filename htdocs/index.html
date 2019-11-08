@@ -16,11 +16,12 @@
 <div id="js-vue" class="l-contents" >
 
 
-    <div class="form">
+    <div class="form " :class="{'is-activate': activateState}">
         <div class="form__inner">
+
+            <span class="form__txt--error" v-if="youtubeDataTransferResultTxt">{{youtubeDataTransferResultTxt}}</span>
             <p class="form__txt">あなたのYouTubeチャンネルの再生リストIDを入力してください。</p>
             <input type="text" placeholder="enter your YoutubePlayListID !!" v-model="youtubeDataApiParam.playlistId" oninput="doInput(event);">
-
             <button type="submit" class="submitBtn" v-on:click="onClickSubmit">submit</button>
         </div>
     </div>

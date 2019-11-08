@@ -14,18 +14,18 @@
     app.Vue.computed,
     app.Vue.watch ={},
     app.Vue.data = {},
-    app.Vue.data.items = [];
     app.Vue.data.youtubeData = [];
-
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: '', // 再生リストID
         maxResults: 30, // デフォルトは5件
         key: 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
     };
-
     app.Vue.data.playerState = false;
-    app.Vue.data.perPlayerState = false;
+    app.Vue.data.activateState = false;
+    app.Vue.data.youtubeDataTransferResultTxt = "";
+
+
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -39,11 +39,13 @@
         },
 
     app.Vue.methods.getYoutubeData = function () {
-        return axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {params: this.youtubeDataApiParam})
+        return axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {params: this.youtubeDataApiParam}).catch(function (error) {
+
+        })
     }
 
     app.Vue.methods.getYoutubeData_snippets = function (response) {
-        //youtube再生リストが再度入力された時にyoutubeDataをリセット
+        //youtube再生リストIDが再度入力された時にyoutubeDataをリセット
         this.youtubeData = []
         for (var i = 0; i < response.data.items.length; i++) {
             this.youtubeData.push(response.data.items[i].snippet);
@@ -57,6 +59,7 @@
 
     app.Vue.mounted= function(){
 
+
     }
 
     app.Vue.methods.doInput = function(event){
@@ -66,7 +69,14 @@
     app.Vue.methods.onClickSubmit = async function(e){
 
         var response = await this.getYoutubeData();
-        this.getYoutubeData_snippets(response)
+        if(response === undefined){
+            this.youtubeDataTransferResultTxt = "再生リストIDが存在しません。"
+        }else{
+            this.activateState = !this.activateState;
+            this.getYoutubeData_snippets(response)
+        }
+
+
 
         //alert("onclicksubmit");
     }
