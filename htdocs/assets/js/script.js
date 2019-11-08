@@ -34,7 +34,7 @@
     app.Music.filterby = "all",
     app.Music.nowplaying = {
             videoId: null,
-            nextVideoId: "tNgIJGWidEs",
+            nextVideoId: null,
             state: "stop"
         },
 
@@ -166,10 +166,13 @@
         })
 
         // console.log(app.Vue.data.youtubeData)
+
         console.log(app.Music.player.getPlayerState());
-        var playerStatus = app.Music.player.getPlayerState()
+        // var playerStatus = app.Music.player.getPlayerState()
+
         //player再生狩猟したら次の度王がを再生する
-        if (0 === playerStatus) {
+
+
 
             // app.Vue.data.youtubeData.forEach(function (obj,index) {
             //     // console.log(index)
@@ -180,11 +183,8 @@
             //
             // })
 
-
-            app.Music.methods.setNowplaying(app.Music.nowplaying.nextVideoId, "play");
-            app.Music.player.nextVideo();
-
-
+            // app.Music.methods.setNowplaying(app.Music.nowplaying.nextVideoId, "play");
+            // app.Music.player.nextVideo();
 
 
         //     var s, o = app.Vue.data.youtubeData.map(function(t) {
@@ -194,7 +194,7 @@
         //     -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]), app.Music.autoplay && void 0 != s && "" != s.videoId ? (app.Music.methods.createYoutube(s.videoId),
         //     app.Music.methods.setNowplaying(s.videoId, "play")) : app.Music.methods.stop()
 
-        }
+        // }
 
     }
 
