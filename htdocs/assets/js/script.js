@@ -27,14 +27,6 @@
     app.Vue.data.playerState = false;
     app.Vue.data.perPlayerState = false;
 
-    // var classObj = {
-    //     is_playing:false,
-    // }
-    //
-    // app.Vue.data.class = classObj;
-
-
-
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -149,29 +141,15 @@
         }else{
             app.Vue.data.playerState = false
         }
-
-
-
-        app.Vue.data.youtubeData.forEach(function (obj,index) {
-
+        //youtubeが状態変化したらvue インスタンスが持つyoutubeDataにリアクティブなデータをセットする
+        app.Vue.data.youtubeData.forEach(function (obj) {
             if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
-                // console.log(obj);
-                // obj.playingState = true;
                 Vue.set(obj,'playingState',app.Music.nowplaying.state);
-                // Vue.set(app.Vue.data[index].resourceId,'playingState',true)
-                // this.$set(this.youtubeData[index], 'playingState', true)
             }else{
                 Vue.set(obj,'playingState',"stop");
-                // Vue.set(obj,'playingState',app.Music.nowplaying.state);
-                // Vue.set(app.Vue.data.youtubeData[index].resourceId,'playingState',false)
-                // obj.playingState = false;
-                // this.$set(this.youtubeData[index], 'playingState', false)
             }
-
         })
-
         console.log(app.Vue.data.youtubeData)
-
 
         // if (0 == t.data) {
         //     var s, o = app.Vue.data.youtubeData.map(function(t) {
