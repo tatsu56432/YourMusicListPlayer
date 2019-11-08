@@ -19,14 +19,13 @@
 
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
-        playlistId: 'PL5V6jEpgjar87uPuGiz18LGmWAHs6RMJH', // 再生リストID
+        playlistId: '', // 再生リストID
         maxResults: 30, // デフォルトは5件
         key: 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
     };
 
     app.Vue.data.playerState = false;
     app.Vue.data.perPlayerState = false;
-
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -44,22 +43,32 @@
     }
 
     app.Vue.methods.getYoutubeData_snippets = function (response) {
+        //youtube再生リストが再度入力された時にyoutubeDataをリセット
+        this.youtubeData = []
         for (var i = 0; i < response.data.items.length; i++) {
             this.youtubeData.push(response.data.items[i].snippet);
         }
     }
 
     app.Vue.created = async function () {
-
         console.log(this.playerState)
         console.log(app.Music.nowplaying.state)
-
-        var response = await this.getYoutubeData();
-        this.getYoutubeData_snippets(response)
     }
 
     app.Vue.mounted= function(){
 
+    }
+
+    app.Vue.methods.doInput = function(event){
+        this.youtubeDataApiParam = event.target.value;
+    }
+
+    app.Vue.methods.onClickSubmit = async function(e){
+
+        var response = await this.getYoutubeData();
+        this.getYoutubeData_snippets(response)
+
+        //alert("onclicksubmit");
     }
 
     app.Vue.methods.onClickPlay = function (e) {

@@ -16,6 +16,16 @@
 <div id="js-vue" class="l-contents" >
 
 
+    <div class="form">
+        <div class="form__inner">
+            <p class="form__txt">あなたのYouTubeチャンネルの再生リストIDを入力してください。</p>
+            <input type="text" placeholder="enter your YoutubePlayListID !!" v-model="youtubeDataApiParam.playlistId" oninput="doInput(event);">
+
+            <button type="submit" class="submitBtn" v-on:click="onClickSubmit">submit</button>
+        </div>
+    </div>
+
+
     <div  class="l-contents__inner" :class="{'is-playing': playerState}">
 
         <div class="l-sidebar sidebar">
@@ -44,6 +54,8 @@
                         <h3 class="title">
                             <!--<span class="song">{{item.resourceId.videoId}}</span>-->
                             <span class="song">{{item.title}}</span>
+                            <span></span>
+
                         </h3>
 
                         <!--<p class="album">{{item.album}}, {{item.year}}</p>-->
@@ -52,6 +64,7 @@
                             <li>Link:</li>
                             <li><a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.resourceId.videoId">YouTube</a></li>
                         </ul>
+
                     </div>
 
                 </div>
