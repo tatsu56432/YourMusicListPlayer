@@ -314,9 +314,23 @@ body {
 
 @media only screen and(max-width: 1000px){
 
+
+  .l-contents{
+    .l-contents__inner{
+      justify-content: space-between;
+    }
+  }
+
+  .songs{
+    width: 40%;
+  }
+
   .songs__item{
     display: block;
     width: 80%;
+    .songs__cover{
+      margin-bottom: 4%;
+    }
   }
   .songs__cover {
     width: 100%;
