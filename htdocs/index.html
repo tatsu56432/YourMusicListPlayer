@@ -18,7 +18,6 @@
 
     <div class="form " :class="{'is-activate': activateState}">
         <div class="form__inner">
-
             <span class="form__txt--error" v-if="youtubeDataTransferResultTxt">{{youtubeDataTransferResultTxt}}</span>
             <p class="form__txt">あなたのYouTubeチャンネルの再生リストIDを入力してください。</p>
             <input type="text" placeholder="enter your YoutubePlayListID !!" v-model="youtubeDataApiParam.playlistId" oninput="doInput(event);">
@@ -37,8 +36,7 @@
 
         <div class="l-songs songs">
             <div class="songs__inner">
-
-                <!--<transition-group tag="div" name="v-song-item" appear appear-class="v-song-item-appear" class="songs__list m-content">-->
+                <transition-group tag="div" name="vue-anime-list" appear appear-class="v-song-item-appear" class="songs__items">
                 <div class="songs__item" v-for="item in youtubeData" v-bind:state="item.playingState" v-bind:key="item.resourceId.videoId" :class="{'is-playing': item.playingState}">
 
                     <figure class="songs__cover">
@@ -55,9 +53,9 @@
                         <h3 class="title">
                             <!--<span class="song">{{item.resourceId.videoId}}</span>-->
                             <span class="song">{{item.title}}</span>
-                            <span></span>
-
                         </h3>
+
+                        <p class="release"><span></span></p>
 
                         <!--<p class="album">{{item.album}}, {{item.year}}</p>-->
 
@@ -69,16 +67,13 @@
                     </div>
 
                 </div>
-
-                <!--</transition-group>-->
-
+                </transition-group>
             </div>
-        </div><!-- songs -->
+        </div>
 
         <div class="l-player">
             <div id="js-youtubePlayer" class="l-player__inner">
                 <div id="js-frame"></div>
-
                 <!--<iframe id="js-frame" class="m-player__frame" state="play" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/xd3jcVi5zZ4?autoplay=0&amp;playsinline=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fnujawak.online&amp;widgetid=1"></iframe>-->
             </div>
         </div>

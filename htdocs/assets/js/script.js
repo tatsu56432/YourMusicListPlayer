@@ -59,6 +59,8 @@
     app.Vue.mounted= function(){
 
 
+
+
     }
 
     app.Vue.methods.doInput = function(event){
@@ -73,6 +75,8 @@
             this.activateState = !this.activateState;
             this.getYoutubeData_snippets(response)
         }
+
+        console.log(this.youtubeData)
     }
 
     app.Vue.methods.onClickPlay = function (e) {

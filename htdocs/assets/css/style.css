@@ -177,6 +177,32 @@ body {
   .songs__item:not(:first-child) {
     margin-top: 50px; }
 
+.vue-anime-list-enter-active {
+  opacity: 0;
+  transform: translateX(50px);
+  transition-property: transform, opacity;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0s; }
+.vue-anime-list-enter-to {
+  opacity: 1;
+  transform: translateX(0); }
+.vue-anime-list-leave-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition-property: transform, opacity;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0s; }
+.vue-anime-list-leave-to {
+  opacity: 0;
+  transform: translateX(50px); }
+.vue-anime-list-move {
+  transition-property: transform;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: 0s; }
+
 .songs__cover {
   position: relative;
   width: 160px;

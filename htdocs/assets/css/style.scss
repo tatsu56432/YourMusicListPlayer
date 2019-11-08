@@ -64,7 +64,7 @@ body {
   box-sizing: border-box;
 }
 
-.form{
+.form {
   transition: opacity .8s cubic-bezier(0.77, 0, 0.175, 1);
   position: fixed;
   width: 100%;
@@ -74,23 +74,23 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #fefeffe0;
-  &.is-activate{
+  &.is-activate {
     opacity: 0;
     z-index: -10;
   }
-  &__inner{
-    .form__txt--error{
+  &__inner {
+    .form__txt--error {
       display: inherit;
       text-align: center;
       margin-top: 22px;
       color: red;
       font-weight: bold;
     }
-    .form__txt{
+    .form__txt {
       text-align: center;
       margin-top: 18px;
     }
-    input[type="text"]{
+    input[type="text"] {
       width: 300px;
       display: block;
       margin: auto;
@@ -98,7 +98,7 @@ body {
       border-radius: 10px;
       margin-top: 18px;
     }
-    button.submitBtn{
+    button.submitBtn {
       text-align: center;
       display: block;
       width: 300px;
@@ -119,10 +119,10 @@ body {
     display: flex;
     height: 100%;
     padding: 10px 0;
-    &.is-playing{
+    &.is-playing {
       //justify-content: flex-end;
       justify-content: space-between;
-      .l-songs{
+      .l-songs {
         width: 25%;
       }
     }
@@ -189,6 +189,10 @@ body {
 
 }
 
+.songs__items {
+
+}
+
 .songs__item {
   position: relative;
   display: flex;
@@ -210,25 +214,64 @@ body {
   border: 5px solid #cccccc;
   -webkit-transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  &[state="play"]{
+  &[state="play"] {
     border: 5px solid palevioletred;
-    .playBtn{
+    .playBtn {
       background-color: palevioletred;
     }
     color: palevioletred;
-    a{
+    a {
       color: palevioletred;
     }
   }
-  &[state="pause"]{
+  &[state="pause"] {
     border: 5px solid #d4d31b;
-    .playBtn{
+    .playBtn {
       background-color: #d4d31b;
     }
   }
 
   &:not(:first-child) {
     margin-top: 50px;
+  }
+}
+
+.vue-anime-list {
+  &-enter-active {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: {
+      property: transform, opacity;
+      duration: 0.6s;
+      timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      delay: 0s;
+    }
+  }
+  &-enter-to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  &-leave-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: {
+      property: transform, opacity;
+      duration: 0.6s;
+      timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      delay: 0s;
+    }
+  }
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  &-move {
+    transition: {
+      property: transform;
+      duration: 0.6s;
+      timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+      delay: 0s;
+    }
   }
 }
 
