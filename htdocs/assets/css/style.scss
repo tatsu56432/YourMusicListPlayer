@@ -230,6 +230,17 @@ body {
       background-color: #d4d31b;
     }
   }
+  &[state="stop"] {
+    color: #fff;
+    //border: 5px solid #d4d31b;
+    .playBtn {
+      //background-color: #d4d31b;
+    }
+    a{
+      color: #00b0ffb5;
+    }
+  }
+
 
   &:not(:first-child) {
     margin-top: 50px;
