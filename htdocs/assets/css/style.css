@@ -179,17 +179,19 @@ body {
 
 .vue-anime-list-enter-active {
   opacity: 0;
-  transform: translateX(50px);
+  ebkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transform: perspective(1400px) rotateY(-58deg);
   transition-property: transform, opacity;
   transition-duration: 0.6s;
   transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
   transition-delay: 0s; }
 .vue-anime-list-enter-to {
   opacity: 1;
-  transform: translateX(0); }
+  transform: translateY(0); }
 .vue-anime-list-leave-active {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
   transition-property: transform, opacity;
   transition-duration: 0.6s;
   transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
@@ -226,3 +228,14 @@ body {
   .songs__meta__links {
     list-style: none;
     color: #777; }
+
+@media only screen and (max-width: 1000px) {
+  .songs__item {
+    display: block;
+    width: 80%; }
+
+  .songs__cover {
+    width: 100%; }
+
+  .songs__meta {
+    width: 100%; } }
