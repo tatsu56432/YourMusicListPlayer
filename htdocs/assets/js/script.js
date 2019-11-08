@@ -40,9 +40,7 @@
 
 
     app.Vue.methods.getYoutubeData = function () {
-        return axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {params: this.youtubeDataApiParam}).catch(function (error) {
-
-        })
+        return axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {params: this.youtubeDataApiParam})
     }
 
     app.Vue.methods.getYoutubeData_snippets = function (response) {
@@ -135,7 +133,7 @@
                 events: {
                     onReady: app.Music.methods.onYoutubeReady,
                     onStateChange: app.Music.methods.onYoutubeStateChange,
-                    // onError: e.Music.methods.onYoutubeError
+                    // onError: app.Music.methods.onYoutubeError
                 }
             };
             app.Music.player = new YT.Player("js-frame", playerParams)
@@ -171,7 +169,7 @@
         console.log(app.Music.player.getPlayerState());
         var playerStatus = app.Music.player.getPlayerState()
         //player再生狩猟したら次の度王がを再生する
-        if (1 === playerStatus) {
+        if (0 === playerStatus) {
 
             // app.Vue.data.youtubeData.forEach(function (obj,index) {
             //     // console.log(index)
