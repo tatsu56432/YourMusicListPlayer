@@ -102,7 +102,7 @@ body {
   height: 100%;
   padding: 10px 0; }
   .l-contents .l-contents__inner.is-playing {
-    justify-content: flex-end; }
+    justify-content: space-between; }
     .l-contents .l-contents__inner.is-playing .l-songs {
       width: 25%; }
 

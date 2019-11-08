@@ -26,7 +26,6 @@
     app.Vue.data.youtubeDataTransferResultTxt = "";
 
 
-
     app.Music.methods = {},
     app.Music._songs = [],
     app.Music.player = {},
@@ -67,7 +66,6 @@
     }
 
     app.Vue.methods.onClickSubmit = async function(e){
-
         var response = await this.getYoutubeData();
         if(response === undefined){
             this.youtubeDataTransferResultTxt = "再生リストIDが存在しません。"
@@ -75,15 +73,10 @@
             this.activateState = !this.activateState;
             this.getYoutubeData_snippets(response)
         }
-
-
-
-        //alert("onclicksubmit");
     }
 
     app.Vue.methods.onClickPlay = function (e) {
         // console.log(e.currentTarget.getAttribute("videoId"))
-
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
             switch (app.Music.nowplaying.state) {
                 case "play":
@@ -95,7 +88,6 @@
         }else{
             app.Music.methods.start(e)
         }
-
     }
 
 
@@ -160,7 +152,7 @@
         }else{
             app.Vue.data.playerState = false
         }
-        //youtubeが状態変化したらvue インスタンスが持つyoutubeDataにリアクティブなデータをセットする
+        //youtubeが状態変化したらvue インスタンスが持つyoutubeDataの各オブジェクトにリアクティブなデータをセットする
         app.Vue.data.youtubeData.forEach(function (obj) {
             if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
                 Vue.set(obj,'playingState',app.Music.nowplaying.state);
