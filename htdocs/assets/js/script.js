@@ -8,11 +8,9 @@
     app.Vue.el = "#js-vue";
     app.Vue.methods = {},
     app.Vue.watch = {},
-    app.Vue.computed,
     app.Vue.created,
     app.Vue.mounted,
     app.Vue.computed,
-    app.Vue.watch ={},
     app.Vue.data = {},
     app.Vue.data.youtubeData = [];
     app.Vue.data.youtubeDataApiParam = {
@@ -57,10 +55,16 @@
     }
 
     app.Vue.mounted= function(){
-
-
-
-
+        //playlistIDのcookieが存在したらそのまま再生画麺へ
+        isExistsPlaylistId = this.$cookies.get("playlistId")
+        if(isExistsPlaylistId){
+            this.youtubeDataApiParam.playlistId = isExistsPlaylistId       
+            this.onClickSubmit()   
+        }
+    }
+    app.Vue.watch = function(){
+        
+        
     }
 
     app.Vue.methods.doInput = function(event){
@@ -68,6 +72,7 @@
     }
 
     app.Vue.methods.onClickSubmit = async function(e){
+        this.$cookies.set("playlistId",this.youtubeDataApiParam.playlistId,60 * 60 * 12);
         var response = await this.getYoutubeData();
         if(response === undefined){
             this.youtubeDataTransferResultTxt = "再生リストIDが存在しません。"
@@ -186,7 +191,8 @@
             app.Music.player.playVideo()
         }
     }
-
+    
+    
 
     new Vue(app.Vue)
 
