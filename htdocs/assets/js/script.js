@@ -56,9 +56,8 @@
 
     app.Vue.mounted= function(){
         //playlistIDのcookieが存在したらそのまま再生画麺へ
-        isExistsPlaylistId = this.$cookies.get("playlistId")
-        if(isExistsPlaylistId){
-            this.youtubeDataApiParam.playlistId = isExistsPlaylistId       
+        if(this.$cookies.get("playlistId")){
+            this.youtubeDataApiParam.playlistId = this.$cookies.get("playlistId")
             this.onClickSubmit()   
         }
     }
