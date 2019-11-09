@@ -166,36 +166,25 @@
         })
 
         // console.log(app.Vue.data.youtubeData)
-
-        console.log(app.Music.player.getPlayerState());
-        // var playerStatus = app.Music.player.getPlayerState()
-
-        //player再生狩猟したら次の度王がを再生する
-
-
-
-            // app.Vue.data.youtubeData.forEach(function (obj,index) {
-            //     // console.log(index)
-            //
-            //     if(obj.resourceId.videoId === app.Music.nowplaying.videoId){
-            //         app.Music.nowplaying.nextVideoId = obj[index + 1].resourceId.videoId
-            //     }
-            //
-            // })
-
-            // app.Music.methods.setNowplaying(app.Music.nowplaying.nextVideoId, "play");
-            // app.Music.player.nextVideo();
-
-
-        //     var s, o = app.Vue.data.youtubeData.map(function(t) {
-        //         return t.resourceId.videoId === app.Music.nowplaying.videoId;
-        //     });
-        //     //動画終了した時次の動画
-        //     -1 != o.indexOf(!0) && (s = app.Vue.data.youtubeData[o.indexOf(!0) + 1]), app.Music.autoplay && void 0 != s && "" != s.videoId ? (app.Music.methods.createYoutube(s.videoId),
-        //     app.Music.methods.setNowplaying(s.videoId, "play")) : app.Music.methods.stop()
-
-        // }
-
+        var playerStatus = app.Music.player.getPlayerState()
+        //動画終了したら次の動画を再生する
+        if(playerStatus === 0){
+            var youtubeData = app.Vue.data.youtubeData
+            var nextVideoId
+            var count = 0
+            for(var i in youtubeData) {
+                if(youtubeData[i].resourceId.videoId === app.Music.nowplaying.videoId){
+                    // console.log(youtubeData[count + 1].resourceId.videoId);
+                    //ここなぜかi+1だとundefinedになる
+                    nextVideoId = youtubeData[count + 1].resourceId.videoId
+                }
+                count++
+            }
+            app.Music.nowplaying.nextVideoId = nextVideoId
+            app.Music.methods.createYoutube(nextVideoId)
+            app.Music.methods.setNowplaying(nextVideoId, "play")
+            app.Music.player.playVideo()
+        }
     }
 
 
