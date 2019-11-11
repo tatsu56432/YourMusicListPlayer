@@ -108,6 +108,10 @@
         this.activateState = false;
     }
 
+    app.Vue.methods.onClickRverseYoutubeData = function(e){
+    this.youtubeData.reverse();
+    }
+
     app.Music.methods.start = function (e) {
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
         app.Music.methods.createYoutube(e.currentTarget.getAttribute("videoId"))
