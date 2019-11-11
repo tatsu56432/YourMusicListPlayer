@@ -12,13 +12,18 @@
     app.Vue.mounted,
     app.Vue.computed,
     app.Vue.data = {},
+    app.Vue.data.apiKey = 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
     app.Vue.data.youtubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: '', // 再生リストID
-        maxResults: 30, // デフォルトは5件
-        key: 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
+        maxResults: 40, // デフォルトは5件
+        key: "AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs"
     };
+
+    //https://developers.google.com/youtube/v3/docs/videos/list
+    app.Vue.data.movieRequest = 'https://www.googleapis.com/youtube/v3/videos'
+
     app.Vue.data.playerState = false;
     app.Vue.data.activateState = false;
     app.Vue.data.youtubeDataTransferResultTxt = "";
@@ -50,17 +55,22 @@
     }
 
     app.Vue.created = async function () {
-        console.log(this.playerState)
-        console.log(app.Music.nowplaying.state)
+        //console.log(this.playerState)
+        // console.log(app.Music.nowplaying.state)
+
     }
 
-    app.Vue.mounted= function(){
+    app.Vue.mounted = function(){
         //playlistIDのcookieが存在したらそのまま再生画麺へ
         if(this.$cookies.get("playlistId")){
             this.youtubeDataApiParam.playlistId = this.$cookies.get("playlistId")
             this.onClickSubmit()   
         }
+
+        this.addYoutubeDataStatistics()
+
     }
+
     app.Vue.watch = function(){
         
         
@@ -80,7 +90,7 @@
             this.getYoutubeData_snippets(response)
         }
 
-        console.log(this.youtubeData)
+        // console.log(this.youtubeData)
     }
 
     app.Vue.methods.onClickPlay = function (e) {
@@ -112,6 +122,34 @@
     this.youtubeData.reverse();
     }
 
+
+    app.Vue.methods.addYoutubeDataStatistics = async function(){
+
+        //このメソッドの中でthis,youtubeDateの使うため
+        var response = await this.getYoutubeData();
+        this.getYoutubeData_snippets(response)
+
+
+        for (var i = 0; i < this.youtubeData.length; i++) {
+            var thisVideId = this.youtubeData[i].resourceId.videoId
+            var movieRequest = this.movieRequest + '?part=statistics&id=' + thisVideId + '&fields=items%2Fstatistics&key=' + this.apiKey
+            var response = await this.getMovieStatics(movieRequest)
+            console.log(response.data.items[0].statistics)
+            var viewCount = response.data.items[0].statistics.viewCount;
+            var likeCount = response.data.items[0].statistics.likeCount;
+            Vue.set(this.youtubeData[i],"viewCount", viewCount)
+            Vue.set(this.youtubeData[i],"likeCount", likeCount)
+        }
+
+        //console.log(this.youtubeData)
+    }
+
+    app.Vue.methods.getMovieStatics = function(request){
+        return axios(request,function (response) {})
+    }
+
+
+
     app.Music.methods.start = function (e) {
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
         app.Music.methods.createYoutube(e.currentTarget.getAttribute("videoId"))
@@ -133,7 +171,6 @@
         app.Music.nowplaying.state = state;
         document.getElementById("js-frame").setAttribute("state", state)
     }
-
 
     app.Music.methods.createYoutube = function (videoId) {
 
@@ -160,7 +197,7 @@
     }
 
     app.Music.methods.onYoutubeReady = function(e) {
-        console.log("onYoutubeReady(): " + e.target.getVideoData().video_id),
+        // console.log("onYoutubeReady(): " + e.target.getVideoData().video_id),
         e.target.playVideo()
     }
 
@@ -175,7 +212,7 @@
          5 – 頭出し済み
          */
         var playerStatus = app.Music.player.getPlayerState()
-        console.log(playerStatus);
+        //console.log(playerStatus);
         if(playerStatus===1){
             app.Vue.data.sidebarStatus  = true;
         }
