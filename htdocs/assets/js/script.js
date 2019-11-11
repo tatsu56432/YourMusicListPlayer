@@ -22,7 +22,7 @@
     app.Vue.data.playerState = false;
     app.Vue.data.activateState = false;
     app.Vue.data.youtubeDataTransferResultTxt = "";
-    app.Vue.data.sidebarStatus = false;
+    app.Vue.data.sidebarStatus = true;
 
     app.Music.methods = {},
     app.Music._songs = [],

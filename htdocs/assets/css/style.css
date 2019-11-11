@@ -124,6 +124,8 @@ body {
       transition: opacity .5s;
       opacity: 0;
       display: none; }
+    .sidebar.is-hide .optionItems {
+      display: none; }
   .sidebar .sidebar__toggleBtn {
     cursor: pointer;
     position: absolute;
