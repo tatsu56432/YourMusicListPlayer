@@ -58,6 +58,8 @@
         //console.log(this.playerState)
         // console.log(app.Music.nowplaying.state)
 
+
+
     }
 
     app.Vue.mounted = function(){
@@ -66,9 +68,6 @@
             this.youtubeDataApiParam.playlistId = this.$cookies.get("playlistId")
             this.onClickSubmit()   
         }
-
-        this.addYoutubeDataStatistics()
-
     }
 
     app.Vue.watch = function(){
@@ -89,6 +88,8 @@
             this.activateState = !this.activateState;
             this.getYoutubeData_snippets(response)
         }
+
+        this.addYoutubeDataStatistics()
 
         // console.log(this.youtubeData)
     }
@@ -116,6 +117,17 @@
         this.youtubeDataApiParam.playlistId = ""
         this.$cookies.remove("playlistId")
         this.activateState = false;
+    }
+
+    app.Vue.methods.onClickAscendViewCount =function(e){
+        this.youtubeData.sort(function(a, b) {
+            if (a.viewCount < b.viewCount) {
+                return 1;
+            } else {
+                return -1;
+            }
+        })
+
     }
 
     app.Vue.methods.onClickRverseYoutubeData = function(e){
