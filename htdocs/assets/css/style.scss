@@ -136,6 +136,7 @@ body {
 .l-sidebar {
   transition: all .5s;
   width: 25%;
+  padding: 10px;
 }
 
 .sidebar {
@@ -181,8 +182,18 @@ body {
       text-align: left;
       font-size: 24px;
       color: #ffffffde;
-      margin-left: 4%;
-      margin-top: 6px;
+    }
+    .optionItems{
+      margin-top: 39px;
+      .optionItem{
+        &:not(:first-child){
+          margin-top: 2%;
+        }
+        a{
+          color: #fff;
+          text-decoration: none;
+        }
+      }
     }
   }
 }

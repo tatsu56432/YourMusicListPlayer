@@ -102,6 +102,11 @@
         this.sidebarStatus = !this.sidebarStatus
     }
 
+    app.Vue.methods.onClickRemovePlaylistId = function(e){
+        this.youtubeDataApiParam.playlistId = ""
+        this.$cookies.remove("playlistId")
+        this.activateState = false;
+    }
 
     app.Music.methods.start = function (e) {
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
