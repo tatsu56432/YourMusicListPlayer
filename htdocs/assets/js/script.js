@@ -172,7 +172,7 @@
             var viewCount = response.data.items[0].statistics.viewCount;
             var likeCount = response.data.items[0].statistics.likeCount;
             Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))
-            Vue.set(this.youtubeData[i],"likeCount", likeCount)
+            Vue.set(this.youtubeData[i],"likeCount", Number(likeCount))
         }
 
         //console.log(this.youtubeData)
