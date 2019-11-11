@@ -6,14 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <title>MyMusicYouTubePlayer</title>
+    <title>YouMusicList Player</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
 
-<div id="js-vue" class="l-contents" >
+<div id="js-vue" class="l-contents contents" >
 
 
     <div class="form " :class="{'is-activate': activateState}">
@@ -28,15 +28,22 @@
 
     <div  class="l-contents__inner" :class="{'is-playing': playerState}">
 
-        <div class="l-sidebar sidebar">
+        <div class="l-sidebar sidebar" :class="{'is-hide':sidebarStatus}">
             <div class="sidebar__inner">
+                <div class="sidebar__toggleBtn toggleBtn" v-on:click="onClickSidebarToggleBtn">
+                    <div class="toggleBtn__inner">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
 
+                <h1 class="sidebar__ttl">YouMusicList<br>Player</h1>
             </div>
         </div>
 
         <div class="l-songs songs">
             <div class="songs__inner">
-
                 <transition-group tag="div" name="vue-anime-list" appear appear-class="v-song-item-appear" class="songs__items">
                 <div class="songs__item" v-for="item in youtubeData" v-bind:state="item.playingState" v-bind:key="item.resourceId.videoId" :class="{'is-playing': item.playingState}">
                     <figure class="songs__cover">
@@ -63,7 +70,7 @@
             </div>
         </div>
 
-        <div class="l-player">
+        <div class="l-player player">
             <div id="js-youtubePlayer" class="l-player__inner">
                 <div id="js-frame"></div>
             </div>

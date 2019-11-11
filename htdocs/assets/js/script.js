@@ -22,7 +22,7 @@
     app.Vue.data.playerState = false;
     app.Vue.data.activateState = false;
     app.Vue.data.youtubeDataTransferResultTxt = "";
-
+    app.Vue.data.sidebarStatus = false;
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -98,6 +98,10 @@
         }
     }
 
+    app.Vue.methods.onClickSidebarToggleBtn = function(e){
+        this.sidebarStatus = !this.sidebarStatus
+    }
+
 
     app.Music.methods.start = function (e) {
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
@@ -152,6 +156,20 @@
     }
 
     app.Music.methods.onYoutubeStateChange = function(player) {
+        /**
+         * playerStatus
+         -1 – 未開始
+         0 – 終了
+         1 – 再生中
+         2 – 一時停止
+         3 – バッファリング中
+         5 – 頭出し済み
+         */
+        var playerStatus = app.Music.player.getPlayerState()
+        console.log(playerStatus);
+        if(playerStatus===1){
+            app.Vue.data.sidebarStatus  = true;
+        }
 
         //youtubeが状態変化した時にVueのインスタンスにもplayerの状態を持たす
         var is_playing = app.Music.nowplaying.state==="play" ? true: false;
@@ -169,8 +187,7 @@
             }
         })
 
-        // console.log(app.Vue.data.youtubeData)
-        var playerStatus = app.Music.player.getPlayerState()
+
         //動画終了したら次の動画を再生する
         if(playerStatus === 0){
             var youtubeData = app.Vue.data.youtubeData

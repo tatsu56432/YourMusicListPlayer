@@ -108,10 +108,46 @@ body {
 
 .l-songs {
   transition: all .5s;
-  width: 80%; }
+  width: 73%; }
 
 .l-sidebar {
-  width: 20%; }
+  transition: all .5s;
+  width: 25%; }
+
+.sidebar {
+  background-color: #e91e6357;
+  position: relative; }
+  .sidebar.is-hide {
+    width: 55px; }
+    .sidebar.is-hide .sidebar__ttl {
+      transition: opacity .5s;
+      opacity: 0;
+      display: none; }
+  .sidebar .sidebar__toggleBtn {
+    cursor: pointer;
+    position: absolute;
+    width: 40px;
+    height: 25px;
+    top: 20px;
+    right: 10px;
+    margin: auto; }
+  .sidebar .toggleBtn span {
+    background-color: #fff;
+    height: 2px;
+    width: 100%;
+    position: absolute; }
+  .sidebar .toggleBtn span:first-child {
+    top: 0; }
+  .sidebar .toggleBtn span:nth-child(2) {
+    top: 11.5px; }
+  .sidebar .toggleBtn span:nth-child(3) {
+    bottom: 0; }
+  .sidebar__inner .sidebar__ttl {
+    text-align: left;
+    font-size: 24px;
+    color: #ffffffde;
+    margin-left: 4%;
+    margin-top: 6px; }
 
 .l-player {
   position: fixed;
