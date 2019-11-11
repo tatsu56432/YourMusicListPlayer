@@ -120,39 +120,37 @@
     }
 
     app.Vue.methods.onClickAscendViewCount =function(e){
-
-        object_array_sort(this.youtubeData, 'viewCount', 'asc', function(newData){
-            //ソート後の処理
-            console.log(newData); //
+        this.ObjectArraySort(this.youtubeData, 'viewCount', 'asc', function(newData){
             this.youtubeData = newData
         });
-
-
-        function object_array_sort(data,key,order,fn){
-            //デフォは降順(DESC)
-            var num_a = -1;
-            var num_b = 1;
-
-            if(order === 'asc'){//指定があれば昇順(ASC)
-                num_a = 1;
-                num_b = -1;
-            }
-
-            data = data.sort(function(a, b){
-                var x = a[key];
-                var y = b[key];
-                if (x > y) return num_a;
-                if (x < y) return num_b;
-                return 0;
-            });
-
-            fn(data); // ソート後の配列を返す
-        }
-
     }
 
+    app.Vue.methods.onClickDescendViewCount =function(e){
+        this.ObjectArraySort(this.youtubeData, 'viewCount', '', function(newData){
+            this.youtubeData = newData
+        });
+    }
 
+    app.Vue.methods.ObjectArraySort=function(data,key,order,fn){
+        //デフォは降順(DESC)
+        var num_a = -1;
+        var num_b = 1;
 
+        if(order === 'asc'){//指定があれば昇順(ASC)
+            num_a = 1;
+            num_b = -1;
+        }
+
+        data = data.sort(function(a, b){
+            var x = a[key];
+            var y = b[key];
+            if (x > y) return num_a;
+            if (x < y) return num_b;
+            return 0;
+        });
+
+        fn(data); // ソート後の配列を返す
+    }
 
     app.Vue.methods.onClickRverseYoutubeData = function(e){
     this.youtubeData.reverse();
