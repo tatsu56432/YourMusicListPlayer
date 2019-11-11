@@ -120,15 +120,39 @@
     }
 
     app.Vue.methods.onClickAscendViewCount =function(e){
-        this.youtubeData.sort(function(a, b) {
-            if (a.viewCount < b.viewCount) {
-                return 1;
-            } else {
-                return -1;
+
+        object_array_sort(this.youtubeData, 'viewCount', 'asc', function(newData){
+            //ソート後の処理
+            console.log(newData); //
+            this.youtubeData = newData
+        });
+
+
+        function object_array_sort(data,key,order,fn){
+            //デフォは降順(DESC)
+            var num_a = -1;
+            var num_b = 1;
+
+            if(order === 'asc'){//指定があれば昇順(ASC)
+                num_a = 1;
+                num_b = -1;
             }
-        })
+
+            data = data.sort(function(a, b){
+                var x = a[key];
+                var y = b[key];
+                if (x > y) return num_a;
+                if (x < y) return num_b;
+                return 0;
+            });
+
+            fn(data); // ソート後の配列を返す
+        }
 
     }
+
+
+
 
     app.Vue.methods.onClickRverseYoutubeData = function(e){
     this.youtubeData.reverse();
@@ -149,7 +173,7 @@
             console.log(response.data.items[0].statistics)
             var viewCount = response.data.items[0].statistics.viewCount;
             var likeCount = response.data.items[0].statistics.likeCount;
-            Vue.set(this.youtubeData[i],"viewCount", viewCount)
+            Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))
             Vue.set(this.youtubeData[i],"likeCount", likeCount)
         }
 
