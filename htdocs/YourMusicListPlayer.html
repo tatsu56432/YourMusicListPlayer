@@ -42,13 +42,21 @@
                     <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickRemovePlaylistId">再生リストを変更する</a></li>
                     <!--<li class="optionItem"><a href="javascript:void(0);" v-on:click="">再生回数の多い順</a></li>-->
                     <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickRverseYoutubeData">Reverse</a></li>
-                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickAscendViewCount">Ascend viewCount</a></li>
-                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickDescendViewCount">Descend viewCount</a></li>
+                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickDescendViewCount">再生回数の多い順</a></li>
+                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickAscendViewCount">再生回数の少ない順</a></li>
                 </ul>
+
             </div>
         </div>
 
-        <div class="l-songs songs">
+        <div class="l-songs songs" :class="{'is-hide':sidebarStatus2}">
+            <div class="songs__toggleBtn toggleBtn" v-on:click="onClickSidebarToggleBtn2">
+                <div class="toggleBtn__inner">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
             <div class="songs__inner">
                 <transition-group tag="div" name="vue-anime-list" appear appear-class="v-song-item-appear" class="songs__items">
                 <div class="songs__item" v-for="item in youtubeData" v-bind:state="item.playingState" v-bind:key="item.resourceId.videoId" :class="{'is-playing': item.playingState}">

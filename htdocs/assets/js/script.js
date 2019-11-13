@@ -28,6 +28,7 @@
     app.Vue.data.activateState = false;
     app.Vue.data.youtubeDataTransferResultTxt = "";
     app.Vue.data.sidebarStatus = true;
+    app.Vue.data.sidebarStatus2 = true;
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -110,6 +111,10 @@
     }
 
     app.Vue.methods.onClickSidebarToggleBtn = function(e){
+        this.sidebarStatus = !this.sidebarStatus
+    }
+
+    app.Vue.methods.onClickSidebarToggleBtn2 = function(e){
         this.sidebarStatus = !this.sidebarStatus
     }
 

@@ -54,7 +54,8 @@ body {
   color: #333;
   background: #f2ede9;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  position: relative; }
 
 .form {
   transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
@@ -108,7 +109,41 @@ body {
 
 .l-songs {
   transition: all .5s;
-  width: 73%; }
+  width: 73%;
+  position: relative; }
+  .l-songs .songs__toggleBtn {
+    position: absolute;
+    top: 3px;
+    width: 30px;
+    height: 25px;
+    left: -40px;
+    cursor: pointer; }
+    .l-songs .songs__toggleBtn .toggleBtn__inner {
+      position: relative;
+      height: 100%; }
+      .l-songs .songs__toggleBtn .toggleBtn__inner span {
+        display: block;
+        width: 100%;
+        position: absolute;
+        height: 2px;
+        left: 0;
+        right: 8px;
+        border-radius: 10px;
+        margin: auto;
+        background-color: #fff; }
+      .l-songs .songs__toggleBtn .toggleBtn__inner span:first-child {
+        top: 7px;
+        transform: rotate(40deg);
+        width: 68%;
+        right: -14px; }
+      .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(2) {
+        top: 49%; }
+      .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(3) {
+        bottom: 0;
+        bottom: 4px;
+        transform: rotate(-40deg);
+        width: 68%;
+        right: -11px; }
 
 .l-sidebar {
   transition: all .5s;
@@ -282,7 +317,7 @@ body {
     justify-content: space-between; }
 
   .songs {
-    width: 40%; }
+    width: 80%; }
 
   .songs__item {
     display: block;
