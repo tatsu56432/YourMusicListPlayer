@@ -1,4 +1,4 @@
-あなたのYouTubeの再生リストのIDを入力すると、music playerが立ち上がります。
+あなたのYouTubeチャンネルの再生リストのIDを入力すると、music playerが立ち上がります。
 
 http://my-instanwin.work/YourMusicListPlayer.html
 
