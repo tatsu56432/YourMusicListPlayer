@@ -1,4 +1,4 @@
-!function ($) {
+!function () {
 
     var app = {
         Vue: {},
@@ -293,4 +293,4 @@
     new Vue(app.Vue)
 
 
-}(jQuery);
+}();
