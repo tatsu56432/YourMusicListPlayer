@@ -115,7 +115,7 @@
         this.sidebarStatus = !this.sidebarStatus
     }
 
-    app.Vue.methods.onClickSidebarToggleBtn2 = function(e){
+    app.Vue.methods.onClickSongsBarToggleBtn = function(e){
         this.songsBarStatus = !this.songsBarStatus
     }
 
