@@ -13,6 +13,7 @@
     app.Vue.computed,
     app.Vue.data = {},
     app.Vue.data.apiKey = 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
+    app.Vue.data.initialYoutubeData= [],
     app.Vue.data.youtubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
@@ -26,7 +27,7 @@
 
     app.Vue.data.playerState = false;
     app.Vue.data.activateState = false;
-    app.Vue.data.youtubeDataTransferResultTxt = "";
+    app.Vue.data.youtubeDataTransferResultTxt = '';
     app.Vue.data.sidebarStatus = true;
     app.Vue.data.songsBarStatus = true;
 
@@ -59,17 +60,15 @@
     app.Vue.created = async function () {
         //console.log(this.playerState)
         // console.log(app.Music.nowplaying.state)
-
-
-
     }
 
     app.Vue.mounted = function(){
-        //playlistIDのcookieが存在したらそのまま再生画麺へ
+        //playlistIDのcookieが存在したらそのまま再生画面へ
         if(this.$cookies.get("playlistId")){
             this.youtubeDataApiParam.playlistId = this.$cookies.get("playlistId")
             this.onClickSubmit()   
         }
+        // this.initialYoutubeData = this.youtubeData;
     }
 
     app.Vue.watch = function(){
@@ -83,6 +82,7 @@
 
     app.Vue.methods.onClickSubmit = async function(e){
         this.$cookies.set("playlistId",this.youtubeDataApiParam.playlistId,60 * 60 * 12);
+
         var response = await this.getYoutubeData();
         if(response === undefined){
             this.youtubeDataTransferResultTxt = "再生リストIDが存在しません。"
@@ -93,7 +93,9 @@
 
         this.addYoutubeDataStatistics()
 
-        // console.log(this.youtubeData)
+            this.initialYoutubeData = this.youtubeData;
+
+
     }
 
     app.Vue.methods.onClickPlay = function (e) {
@@ -117,6 +119,11 @@
 
     app.Vue.methods.onClickSongsBarToggleBtn = function(e){
         this.songsBarStatus = !this.songsBarStatus
+    }
+
+    app.Vue.methods.onClickInitDisplay =  async function(e){
+        console.log(this.initialYoutubeData);
+        this.youtubeData = this.initialYoutubeData
     }
 
     app.Vue.methods.onClickRemovePlaylistId = function(e){
@@ -179,16 +186,16 @@
             var likeCount = response.data.items[0].statistics.likeCount;
             Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))
             Vue.set(this.youtubeData[i],"likeCount", Number(likeCount))
+            if(this.youtubeData.length-1 === i) this.initialYoutubeData = this.youtubeData;
         }
 
-        //console.log(this.youtubeData)
+        // console.log(this.youtubeData)
+
     }
 
     app.Vue.methods.getMovieStatics = function(request){
         return axios(request,function (response) {})
     }
-
-
 
     app.Music.methods.start = function (e) {
         app.Music.methods.setNowplaying(e.currentTarget.getAttribute("videoId"), "play")
