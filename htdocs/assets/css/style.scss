@@ -116,6 +116,7 @@ body {
 }
 
 .l-contents {
+  overflow-x: hidden!important;
   .l-contents__inner {
     display: flex;
     height: 100%;
@@ -179,6 +180,10 @@ body {
 
   }
 
+}
+
+.l-songs.is-hide{
+  transform: translateX(100%);
 }
 
 .l-sidebar {

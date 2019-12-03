@@ -98,14 +98,16 @@ body {
     border-radius: 18px;
     padding: 15px 0; }
 
-.l-contents .l-contents__inner {
-  display: flex;
-  height: 100%;
-  padding: 10px 0; }
-  .l-contents .l-contents__inner.is-playing {
-    justify-content: space-between; }
-    .l-contents .l-contents__inner.is-playing .l-songs {
-      width: 25%; }
+.l-contents {
+  overflow-x: hidden !important; }
+  .l-contents .l-contents__inner {
+    display: flex;
+    height: 100%;
+    padding: 10px 0; }
+    .l-contents .l-contents__inner.is-playing {
+      justify-content: space-between; }
+      .l-contents .l-contents__inner.is-playing .l-songs {
+        width: 25%; }
 
 .l-songs {
   transition: all .5s;
@@ -144,6 +146,9 @@ body {
         transform: rotate(-40deg);
         width: 68%;
         right: -11px; }
+
+.l-songs.is-hide {
+  transform: translateX(100%); }
 
 .l-sidebar {
   transition: all .5s;
