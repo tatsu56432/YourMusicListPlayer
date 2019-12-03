@@ -108,53 +108,63 @@ body {
       justify-content: space-between; }
       .l-contents .l-contents__inner.is-playing .l-songs {
         width: 25%; }
-
-.l-songs {
-  transition: all .5s;
-  width: 73%;
-  position: relative; }
-  .l-songs .songs__toggleBtn {
-    position: absolute;
-    top: 3px;
-    width: 30px;
-    height: 25px;
-    left: -40px;
-    cursor: pointer;
-    opacity: 0;
-    z-index: -1;
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
-    .l-songs .songs__toggleBtn.is-playing {
-      opacity: 1;
-      z-index: 10; }
-    .l-songs .songs__toggleBtn .toggleBtn__inner {
-      position: relative;
-      height: 100%; }
-      .l-songs .songs__toggleBtn .toggleBtn__inner span {
-        display: block;
-        width: 100%;
-        position: absolute;
-        height: 2px;
-        left: 0;
-        right: 8px;
-        border-radius: 10px;
-        margin: auto;
-        background-color: #fff; }
-      .l-songs .songs__toggleBtn .toggleBtn__inner span:first-child {
-        top: 7px;
-        transform: rotate(40deg);
-        width: 68%;
-        right: -14px; }
-      .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(2) {
-        top: 49%; }
-      .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(3) {
-        bottom: 0;
-        bottom: 4px;
-        transform: rotate(-40deg);
-        width: 68%;
-        right: -11px; }
-
-.l-songs.is-hide {
-  transform: translateX(100%); }
+  .l-contents .l-songs {
+    transition: all .5s;
+    position: relative; }
+    .l-contents .l-songs .songs__toggleBtn {
+      position: absolute;
+      top: 3px;
+      width: 30px;
+      height: 25px;
+      left: -40px;
+      cursor: pointer;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+      .l-contents .l-songs .songs__toggleBtn.is-playing {
+        opacity: 1;
+        z-index: 10; }
+      .l-contents .l-songs .songs__toggleBtn .toggleBtn__inner {
+        position: relative;
+        height: 100%; }
+        .l-contents .l-songs .songs__toggleBtn .toggleBtn__inner span {
+          display: block;
+          width: 100%;
+          position: absolute;
+          height: 2px;
+          left: 0;
+          right: 8px;
+          border-radius: 10px;
+          margin: auto;
+          background-color: #fff; }
+        .l-contents .l-songs .songs__toggleBtn .toggleBtn__inner span:first-child {
+          top: 7px;
+          transform: rotate(40deg);
+          width: 68%;
+          right: -14px; }
+        .l-contents .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(2) {
+          top: 49%; }
+        .l-contents .l-songs .songs__toggleBtn .toggleBtn__inner span:nth-child(3) {
+          bottom: 0;
+          bottom: 4px;
+          transform: rotate(-40deg);
+          width: 68%;
+          right: -11px; }
+  .l-contents .l-songs.is-hide {
+    transform: translateX(100%); }
+    .l-contents .l-songs.is-hide .songs__toggleBtn .toggleBtn__inner span:first-child {
+      top: 7px;
+      transform: rotate(-40deg);
+      width: 68%;
+      right: auto;
+      left: -2px; }
+    .l-contents .l-songs.is-hide .songs__toggleBtn .toggleBtn__inner span:nth-child(3) {
+      bottom: 0;
+      bottom: 4px;
+      transform: rotate(40deg);
+      width: 68%;
+      right: auto;
+      left: -2px; }
 
 .l-sidebar {
   transition: all .5s;

@@ -125,14 +125,13 @@ body {
       justify-content: space-between;
       .l-songs {
         width: 25%;
-      }
     }
   }
 }
 
 .l-songs {
   transition: all .5s;
-  width: 73%;
+  //width: 73%;
   position: relative;
   .songs__toggleBtn{
     position: absolute;
@@ -169,7 +168,6 @@ body {
         width: 68%;
         right: -14px;
       }
-
       span:nth-child(2){
         top: 49%;
       }
@@ -191,6 +189,26 @@ body {
 
 .l-songs.is-hide{
   transform: translateX(100%);
+  .songs__toggleBtn{
+    .toggleBtn__inner{
+      span:first-child{
+        top: 7px;
+        transform: rotate(-40deg);
+        width: 68%;
+        right: auto;
+        left: -2px;
+      }
+      span:nth-child(3){
+        bottom: 0;
+        bottom: 4px;
+        transform: rotate(40deg);
+        width: 68%;
+        right: auto;
+        left: -2px;
+      }
+    }
+  }
+}
 }
 
 .l-sidebar {
