@@ -141,6 +141,13 @@ body {
     height: 25px;
     left: -40px;
     cursor: pointer;
+    opacity: 0;
+    z-index: -1;
+    transition: all .5s cubic-bezier(0.77, 0, 0.175, 1);
+    &.is-playing{
+      opacity: 1;
+      z-index: 10;
+    }
     .toggleBtn__inner{
       position: relative;
       height: 100%;

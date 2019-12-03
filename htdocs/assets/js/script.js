@@ -28,7 +28,8 @@
     app.Vue.data.activateState = false;
     app.Vue.data.youtubeDataTransferResultTxt = "";
     app.Vue.data.sidebarStatus = true;
-    app.Vue.data.sidebarStatus2 = true;
+    app.Vue.data.songsBarStatus = true;
+
 
     app.Music.methods = {},
     app.Music._songs = [],
@@ -115,7 +116,7 @@
     }
 
     app.Vue.methods.onClickSidebarToggleBtn2 = function(e){
-        this.sidebarStatus = !this.sidebarStatus
+        this.songsBarStatus = !this.songsBarStatus
     }
 
     app.Vue.methods.onClickRemovePlaylistId = function(e){
@@ -173,7 +174,7 @@
             var thisVideId = this.youtubeData[i].resourceId.videoId
             var movieRequest = this.movieRequest + '?part=statistics&id=' + thisVideId + '&fields=items%2Fstatistics&key=' + this.apiKey
             var response = await this.getMovieStatics(movieRequest)
-            console.log(response.data.items[0].statistics)
+            // console.log(response.data.items[0].statistics)
             var viewCount = response.data.items[0].statistics.viewCount;
             var likeCount = response.data.items[0].statistics.likeCount;
             Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))

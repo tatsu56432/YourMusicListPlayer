@@ -119,7 +119,13 @@ body {
     width: 30px;
     height: 25px;
     left: -40px;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+    .l-songs .songs__toggleBtn.is-playing {
+      opacity: 1;
+      z-index: 10; }
     .l-songs .songs__toggleBtn .toggleBtn__inner {
       position: relative;
       height: 100%; }

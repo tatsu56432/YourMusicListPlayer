@@ -40,18 +40,19 @@
 
                 <ul class="optionItems">
                     <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickRemovePlaylistId">再生リストを変更する</a></li>
-                    <!--<li class="optionItem"><a href="javascript:void(0);" v-on:click="">再生回数の多い順</a></li>-->
-                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickRverseYoutubeData">Reverse</a></li>
+                    <!--<li class="optionItem"><a href="javascript:void(0);" v-on:click="">初期表示にする</a></li>-->
                     <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickDescendViewCount">再生回数の多い順</a></li>
                     <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickAscendViewCount">再生回数の少ない順</a></li>
+                    <li class="optionItem"><a href="javascript:void(0);" v-on:click="onClickRverseYoutubeData">Reverse</a></li>
                 </ul>
 
             </div>
         </div>
 
-        <div class="l-songs songs" :class="{'is-hide':sidebarStatus2}">
-            <div class="songs__toggleBtn toggleBtn" v-on:click="onClickSidebarToggleBtn2">
-                <div class="toggleBtn__inner">
+        <div class="l-songs songs" :class="{'is-hide':!songsBarStatus}">
+
+            <div class="songs__toggleBtn toggleBtn" v-on:click="onClickSidebarToggleBtn2" :class="{'is-playing': playerState}">
+                <div class="toggleBtn__inner">1
                     <span></span>
                     <span></span>
                     <span></span>
