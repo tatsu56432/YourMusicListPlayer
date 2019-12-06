@@ -15,6 +15,7 @@
     app.Vue.data.apiKey = 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
     app.Vue.data.initialYoutubeData= [],
     app.Vue.data.youtubeData = [];
+    app.Vue.data.shuffledYoutubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: '', // 再生リストID
@@ -169,13 +170,29 @@
     this.youtubeData.reverse();
     }
 
+    app.Vue.methods.onClickShuffleYoutubeData =function(e){
+        var shuffledData = this.shuffleYoutubeData(this.youtubeData);
+        this.youtubeData.forEach(function (obj,index) {
+                Vue.set(obj,index,shuffledData[index]);
+        })
+    }
+
+    app.Vue.methods.shuffleYoutubeData = function(array){
+        for (let i = array.length - 1; i > 0; i--) {
+            let r = Math.floor(Math.random() * (i + 1))
+            let tmp = array[i]
+            array[i] = array[r]
+            array[r] = tmp
+        }
+        return array
+    }
+
 
     app.Vue.methods.addYoutubeDataStatistics = async function(){
 
         //このメソッドの中でthis,youtubeDateの使うため
         var response = await this.getYoutubeData();
         this.getYoutubeData_snippets(response)
-
 
         for (var i = 0; i < this.youtubeData.length; i++) {
             var thisVideId = this.youtubeData[i].resourceId.videoId
