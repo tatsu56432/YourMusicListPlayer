@@ -5,6 +5,8 @@
         Music: {}
     }
 
+    // var initialYoutubeDataCopy;
+
     app.Vue.el = "#js-vue";
     app.Vue.methods = {},
     app.Vue.watch = {},
@@ -12,15 +14,15 @@
     app.Vue.mounted,
     app.Vue.computed,
     app.Vue.data = {},
-    app.Vue.data.apiKey = 'AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs'
-    app.Vue.data.initialYoutubeData= [],
+    app.Vue.data.apiKey = 'AIzaSyBUcEheCdUocO0H9hC-G6usm5VkkgP7EhM'
+    app.Vue.data.initialYoutubeDataCopy= [],
     app.Vue.data.youtubeData = [];
     app.Vue.data.shuffledYoutubeData = [];
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: '', // 再生リストID
         maxResults: 40, // デフォルトは5件
-        key: "AIzaSyBmMNSFmsKQTMUMlN1qxXHlQjBlOPINuDs"
+        key: "AIzaSyBUcEheCdUocO0H9hC-G6usm5VkkgP7EhM"
     };
 
     //https://developers.google.com/youtube/v3/docs/videos/list
@@ -94,10 +96,10 @@
 
         this.addYoutubeDataStatistics()
 
-            this.initialYoutubeData = this.youtubeData;
 
-
+        // this.initialYoutubeData = this.youtubeData
     }
+
 
     app.Vue.methods.onClickPlay = function (e) {
         // console.log(e.currentTarget.getAttribute("videoId"))
@@ -122,9 +124,18 @@
         this.songsBarStatus = !this.songsBarStatus
     }
 
-    app.Vue.methods.onClickInitDisplay =  async function(e){
-        console.log(this.initialYoutubeData);
-        this.youtubeData = this.initialYoutubeData
+    app.Vue.methods.onClickInitDisplay = function(e){
+        //ディープコピーしたthis.initialYoutubeDataCopyをセットしようとしたけど、
+        //その値はディレクティブにならないから他の配列操作が反映されなくなる。。
+
+        var initialData = [];
+        initialData = this.initialYoutubeDataCopy;
+        this.youtubeData.splice(-this.youtubeData.length);
+        this.youtubeData = this.initialYoutubeDataCopy;
+        // this.youtubeData.forEach(function (obj,index) {
+        //     Vue.set(obj,index,initialData[index])
+        // })
+
     }
 
     app.Vue.methods.onClickRemovePlaylistId = function(e){
@@ -162,7 +173,6 @@
             if (x < y) return num_b;
             return 0;
         });
-
         fn(data); // ソート後の配列を返す
     }
 
@@ -172,9 +182,11 @@
 
     app.Vue.methods.onClickShuffleYoutubeData =function(e){
         var shuffledData = this.shuffleYoutubeData(this.youtubeData);
+
         this.youtubeData.forEach(function (obj,index) {
                 Vue.set(obj,index,shuffledData[index]);
         })
+
     }
 
     app.Vue.methods.shuffleYoutubeData = function(array){
@@ -199,14 +211,14 @@
             var movieRequest = this.movieRequest + '?part=statistics&id=' + thisVideId + '&fields=items%2Fstatistics&key=' + this.apiKey
             var response = await this.getMovieStatics(movieRequest)
             // console.log(response.data.items[0].statistics)
-            var viewCount = response.data.items[0].statistics.viewCount;
-            var likeCount = response.data.items[0].statistics.likeCount;
+            var viewCount = response.data.items[0].statistics.viewCount
+            var likeCount = response.data.items[0].statistics.likeCount
             Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))
             Vue.set(this.youtubeData[i],"likeCount", Number(likeCount))
-            if(this.youtubeData.length-1 === i) this.initialYoutubeData = this.youtubeData;
+            //一番初めにロードしたthis.youtubeDataの配列objectをディープコピーする
+            // if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = JSON.parse(JSON.stringify(this.youtubeData));
+            if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = Vue.util.extend({}, this.youtubeData);
         }
-
-        // console.log(this.youtubeData)
 
     }
 
