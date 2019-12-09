@@ -94,7 +94,6 @@
 
         this.addYoutubeDataStatistics()
 
-
         // this.initialYoutubeData = this.youtubeData
     }
 
@@ -179,7 +178,7 @@
         fn(data); // ソート後の配列を返す
     }
 
-    app.Vue.methods.onClickRverseYoutubeData = function(e){
+    app.Vue.methods.onClickReverseYoutubeData = function(e){
     this.youtubeData.reverse();
     }
 
@@ -202,6 +201,11 @@
         return array
     }
 
+    app.Vue.methods.onClickDescendPublishedDate = function(e){
+        this.youtubeData.sort(function(a,b) {
+            return (a.publishedAt < b.publishedAt ? 1 : -1);
+        });
+    }
 
     app.Vue.methods.addYoutubeDataStatistics = async function(){
 
@@ -233,7 +237,7 @@
     }
 
     app.Vue.methods.getFormattedDate = function(Iso8601){
-        var date = new Date(Iso8601);
+        var date = new Date(Iso8601)
         date = formatDate(date, 'yyyy/MM/dd')
         //https://zukucode.com/2017/04/javascript-date-format.html
         function formatDate (date, format) {
