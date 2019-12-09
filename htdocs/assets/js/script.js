@@ -125,13 +125,20 @@
     }
 
     app.Vue.methods.onClickInitDisplay = function(e){
+
+
+        // console.log(this.initialYoutubeDataCopy);
+        this.youtubeData = Vue.util.extend(this.initialYoutubeDataCopy)
+        this.initialYoutubeDataCopy = Vue.util.extend([], this.initialYoutubeDataCopy)
+
+
+
+        //配列をディレクティブのまま初期化
+        // this.youtubeData.splice(-this.youtubeData.length);
+
         //ディープコピーしたthis.initialYoutubeDataCopyをセットしようとしたけど、
         //その値はディレクティブにならないから他の配列操作が反映されなくなる。。
-
-        var initialData = [];
-        initialData = this.initialYoutubeDataCopy;
-        this.youtubeData.splice(-this.youtubeData.length);
-        this.youtubeData = this.initialYoutubeDataCopy;
+        // this.youtubeData = this.initialYoutubeDataCopy;
         // this.youtubeData.forEach(function (obj,index) {
         //     Vue.set(obj,index,initialData[index])
         // })
@@ -217,7 +224,7 @@
             Vue.set(this.youtubeData[i],"likeCount", Number(likeCount))
             //一番初めにロードしたthis.youtubeDataの配列objectをディープコピーする
             // if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = JSON.parse(JSON.stringify(this.youtubeData));
-            if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = Vue.util.extend({}, this.youtubeData);
+            if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = Vue.util.extend([], this.youtubeData);
         }
 
     }
