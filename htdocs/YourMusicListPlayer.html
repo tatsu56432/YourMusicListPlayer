@@ -76,10 +76,10 @@
                         </h3>
 
                         <ul class="songs__items">
-                            <li>view：{{item.viewCount}}回</li>
-                            <li>like：{{item.likeCount}}回</li>
-                            <li>Link:<a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.resourceId.videoId">YouTube</a></li>
-
+                            <li>Published : {{item.publishedAt}}</li>
+                            <li>View：{{item.viewCount}}回</li>
+                            <li>Like：{{item.likeCount}}回</li>
+                            <li>Link : <a target="_blank" v-bind:href="'https://www.youtube.com/watch?v=' + item.resourceId.videoId">YouTube</a></li>
                         </ul>
                     </div>
                 </div>

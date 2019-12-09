@@ -211,22 +211,43 @@
 
         for (var i = 0; i < this.youtubeData.length; i++) {
             var thisVideId = this.youtubeData[i].resourceId.videoId
-            var movieRequest = this.movieRequest + '?part=statistics&id=' + thisVideId + '&fields=items%2Fstatistics&key=' + this.apiKey
-            var response = await this.getMovieStatics(movieRequest)
-            // console.log(response.data.items[0].statistics)
-            var viewCount = response.data.items[0].statistics.viewCount
-            var likeCount = response.data.items[0].statistics.likeCount
+            var movieRequestStatistics = this.movieRequest + '?part=statistics&id=' + thisVideId + '&fields=items%2Fstatistics&key=' + this.apiKey
+            var movieRequestSnippet = this.movieRequest + '?part=snippet&id=' + thisVideId + '&fields=items%2Fsnippet&key=' + this.apiKey
+            var responseStatistics = await this.getMovieStatics(movieRequestStatistics)
+            var responseSnippet = await this.getMovieStatics(movieRequestSnippet)
+            var viewCount = responseStatistics.data.items[0].statistics.viewCount
+            var likeCount = responseStatistics.data.items[0].statistics.likeCount
+            var publishedAt = responseSnippet.data.items[0].snippet.publishedAt
+            var formattedDate = this.getFormattedDate(publishedAt)
             Vue.set(this.youtubeData[i],"viewCount", Number(viewCount))
             Vue.set(this.youtubeData[i],"likeCount", Number(likeCount))
+            Vue.set(this.youtubeData[i],"publishedAt",String(formattedDate))
             //一番初めにロードしたthis.youtubeDataの配列objectをディープコピーする
             // if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = JSON.parse(JSON.stringify(this.youtubeData));
             if(this.youtubeData.length -1 === i)  this.initialYoutubeDataCopy = Vue.util.extend([], this.youtubeData);
         }
-
     }
 
     app.Vue.methods.getMovieStatics = function(request){
         return axios(request,function (response) {})
+    }
+
+    app.Vue.methods.getFormattedDate = function(Iso8601){
+        var date = new Date(Iso8601);
+        date = formatDate(date, 'yyyy/MM/dd')
+        //https://zukucode.com/2017/04/javascript-date-format.html
+        function formatDate (date, format) {
+            format = format.replace(/yyyy/g, date.getFullYear());
+            format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+            format = format.replace(/dd/g, ('0' + date.getDate()).slice(-2));
+            format = format.replace(/HH/g, ('0' + date.getHours()).slice(-2));
+            format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+            format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+            format = format.replace(/SSS/g, ('00' + date.getMilliseconds()).slice(-3));
+            return format;
+        };
+
+        return date
     }
 
     app.Music.methods.start = function (e) {
