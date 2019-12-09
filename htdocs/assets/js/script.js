@@ -5,8 +5,6 @@
         Music: {}
     }
 
-    // var initialYoutubeDataCopy;
-
     app.Vue.el = "#js-vue";
     app.Vue.methods = {},
     app.Vue.watch = {},
@@ -130,8 +128,6 @@
         // console.log(this.initialYoutubeDataCopy);
         this.youtubeData = Vue.util.extend(this.initialYoutubeDataCopy)
         this.initialYoutubeDataCopy = Vue.util.extend([], this.initialYoutubeDataCopy)
-
-
 
         //配列をディレクティブのまま初期化
         // this.youtubeData.splice(-this.youtubeData.length);
