@@ -97,7 +97,6 @@
         // this.initialYoutubeData = this.youtubeData
     }
 
-
     app.Vue.methods.onClickPlay = function (e) {
         // console.log(e.currentTarget.getAttribute("videoId"))
         if (e.currentTarget.getAttribute("videoId") === app.Music.nowplaying.videoId){
@@ -112,6 +111,17 @@
             app.Music.methods.start(e)
         }
     }
+
+    app.Vue.methods.onClickPlayForMainPlayer = function(e){
+        switch (app.Music.nowplaying.state) {
+            case "play":
+                app.Music.methods.pause();
+                break;
+            case "pause":
+                app.Music.methods.reStart()
+        }
+    }
+
 
     app.Vue.methods.onClickSidebarToggleBtn = function(e){
         this.sidebarStatus = !this.sidebarStatus

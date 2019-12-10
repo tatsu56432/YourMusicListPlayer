@@ -24,6 +24,11 @@
     </div>
 
 
+    <p class="l-mainPlayerBtn" v-on:click="onClickPlayForMainPlayer">
+        <button class="mainPlayerBtn pause"></button>
+    </p>
+
+
     <div  class="l-contents__inner" :class="{'is-playing': playerState}">
 
         <div class="l-sidebar sidebar" :class="{'is-hide':sidebarStatus}">
