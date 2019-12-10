@@ -112,7 +112,7 @@
         }
     }
 
-    app.Vue.methods.onClickPlayForMainPlayer = function(e){
+    app.Vue.methods.onClickPauseMainPlayer = function(e){
         switch (app.Music.nowplaying.state) {
             case "play":
                 app.Music.methods.pause();
