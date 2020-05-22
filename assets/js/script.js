@@ -12,7 +12,7 @@
     app.Vue.mounted,
     app.Vue.computed,
     app.Vue.data = {},
-    app.Vue.data.apiKey = 'AIzaSyBUcEheCdUocO0H9hC-G6usm5VkkgP7EhM'
+    app.Vue.data.apiKey = 'AIzaSyBdvpEgxM2mAP3dzfiwx7HwGbYsOKf45Ws'
     app.Vue.data.initialYoutubeDataCopy= [],
     app.Vue.data.youtubeData = [];
     app.Vue.data.shuffledYoutubeData = [];
@@ -20,7 +20,7 @@
         part: 'snippet',
         playlistId: '', // 再生リストID
         maxResults: 60, // デフォルトは5件
-        key: "AIzaSyBUcEheCdUocO0H9hC-G6usm5VkkgP7EhM"
+        key: "AIzaSyBdvpEgxM2mAP3dzfiwx7HwGbYsOKf45Ws"
     };
 
     //https://developers.google.com/youtube/v3/docs/videos/list
