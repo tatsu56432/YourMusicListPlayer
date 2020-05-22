@@ -19,7 +19,7 @@
     app.Vue.data.youtubeDataApiParam = {
         part: 'snippet',
         playlistId: '', // 再生リストID
-        maxResults: 40, // デフォルトは5件
+        maxResults: 60, // デフォルトは5件
         key: "AIzaSyBUcEheCdUocO0H9hC-G6usm5VkkgP7EhM"
     };
 
